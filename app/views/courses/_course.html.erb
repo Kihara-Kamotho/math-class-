@@ -16,4 +16,8 @@
   <p class="my-5">
     <%= button_to 'delete', course_path(course), method: :delete %>
   </p>
+
+  <p class="my-5">
+    <%= link_to 'new section', new_course_section_url(@course) %>
+  </p>
 </div>

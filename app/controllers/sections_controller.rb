@@ -14,7 +14,7 @@ class SectionsController < ApplicationController
   def create 
     @section = @course.sections.build(section_params)
 
-    if @section 
+    if @section.save
       flash[:notice] = 'Section created successfully.'
       redirect_to section_path @section 
     else 

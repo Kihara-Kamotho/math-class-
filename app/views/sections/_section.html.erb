@@ -1,0 +1,24 @@
+<div id="<%= dom_id section %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= section.title %>
+  </p>
+
+    <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= section.description %>
+  </p>
+
+  <p class="my-5">
+    <%= link_to 'edit', edit_section_path(section) %>
+  </p>
+
+  <p class="my-5">
+    <%= button_to 'delete', section_path(section), method: :delete %>
+  </p>
+
+  <p class="my-5">
+    <%= link_to 'back', root_path %>
+  </p>
+
+</div>
