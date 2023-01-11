@@ -23,8 +23,6 @@ class SectionsController < ApplicationController
   end
 
   def show 
-    @section
-    redirect_to section_path @section 
   end
 
   def edit 
