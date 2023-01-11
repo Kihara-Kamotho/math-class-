@@ -1,0 +1,26 @@
+<div id="<%= dom_id lesson %>">
+  <h3>Lesson</h3>
+  
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= lesson.title %>
+  </p>
+
+    <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= lesson.description %>
+  </p>
+
+  <p class="my-5">
+    <%= link_to 'edit', edit_lesson_path(lesson) %>
+  </p>
+
+  <p class="my-5">
+    <%= button_to 'delete', lesson_path(lesson), method: :delete %>
+  </p>
+
+  <p class="my-5">
+    <%= link_to 'back', root_path %>
+  </p>
+
+</div>

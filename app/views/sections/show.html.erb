@@ -1,3 +1,14 @@
 <div>
   <%= render @section %>
 </div>
+
+<h3><%= pluralize(@section.lessons.size, 'lesson') %></h3>
+<div>
+  <%# lessons for a specific section %>
+  <% unless @section.lessons.nil? %>
+    <% @section.lessons.each do |lesson| %>
+      <%= lesson.title %>
+      <%= link_to 'show', lesson_path(lesson) %>
+    <% end %>
+  <% end %>
+</div>

@@ -22,8 +22,6 @@ class LessonsController < ApplicationController
   end
 
   def show 
-    @lesson
-    redirect_to lesson_path @lesson 
   end
 
   def edit 
