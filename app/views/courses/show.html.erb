@@ -1,0 +1,20 @@
+<div>
+  <%= render @course %>
+</div>
+
+<div>
+  <%= link_to 'courses', courses_url %>
+</div>
+
+<div>
+  <h3><%= pluralize(@course.sections.count, 'section') %></h3>
+
+  <div>
+    <% unless @course.sections.nil? %>
+      <% @course.sections.each do |section| %>
+        <%= section.title %>
+        <%= link_to 'show', section_path(section) %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
