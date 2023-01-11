@@ -8,4 +8,12 @@
     <strong class="block font-medium mb-1">Description:</strong>
     <%= course.description %>
   </p>
+
+  <p class="my-5">
+    <%= link_to 'edit', edit_course_path(course) %>
+  </p>
+
+  <p class="my-5">
+    <%= button_to 'delete', course_path(course), method: :delete %>
+  </p>
 </div>
