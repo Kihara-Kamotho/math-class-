@@ -12,9 +12,17 @@ class LessonsController < ApplicationController
 
   def create 
     @lesson = @section.lessons.build(lesson_params)
+
+    if @lesson.save 
+      flash[:notice] = 'Lesson created successfully.'
+      redirect_to lesson_path @lesson 
+    else 
+      render :new 
+    end 
   end
 
   def show 
+    @lesson
     redirect_to lesson_path @lesson 
   end
 

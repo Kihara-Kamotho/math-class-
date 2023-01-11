@@ -22,6 +22,8 @@ class CoursesController < ApplicationController
   end
 
   def show 
+    @course 
+    redirect_to course_path @course 
   end
 
   def edit 

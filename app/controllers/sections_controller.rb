@@ -4,8 +4,6 @@ class SectionsController < ApplicationController
 
   def index 
     # display all sections belonging to a course 
-    # find course 
-    @course = Course.find(params[:course_id])
     @sections = @course.sections
   end 
 
@@ -18,13 +16,14 @@ class SectionsController < ApplicationController
 
     if @section 
       flash[:notice] = 'Section created successfully.'
-      redirect_to course_section_path(@course, @section) 
+      redirect_to section_path @section 
     else 
       render :new 
     end
   end
 
   def show 
+    @section
     redirect_to section_path @section 
   end
 
@@ -34,7 +33,7 @@ class SectionsController < ApplicationController
   def update 
     if @section.update(section_params) 
       flash[:notice] = 'Section updated successfully.' 
-      redirect_to course_section_path(@course, @section) 
+      redirect_to section_path(@section) 
     else 
       render :edit 
     end
