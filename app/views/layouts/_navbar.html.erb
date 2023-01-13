@@ -1,3 +1,13 @@
 <div class="navbar bg-primary text-primary-content">
-  <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+  <a href='/courses' class="btn btn-ghost normal-case text-xl">Home</a>
+
+  <%# sign in links %>
+  <div class='btn-group right-0'>
+    <% if user_signed_in? %>
+      <%= button_to 'log out', destroy_user_session_path, method: :delete, class: 'btn btn-sm rounded'%> 
+    <% else %>
+      <%= link_to 'sign in', new_user_session_path, class: 'btn btn-sm' %>
+      <%= link_to 'sign up', new_user_registration_path, class: 'btn btn-sm'%>
+    <% end %>
+  </div>
 </div>
