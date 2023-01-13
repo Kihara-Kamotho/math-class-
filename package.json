@@ -3,6 +3,7 @@
   "private": "true",
   "dependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "daisyui": "^2.46.1",
     "esbuild": "^0.16.16",
     "rollup": "^3.9.1",
     "stimulus": "^3.2.1",
