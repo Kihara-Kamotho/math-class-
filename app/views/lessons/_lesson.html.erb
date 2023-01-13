@@ -11,6 +11,28 @@
     <%= lesson.description %>
   </p>
 
+  <p class="my-5"> 
+    <strong class="block font-medium mb-1">Video:</strong>
+    <% if lesson.video.attached? %>
+      <%# videojs %>
+      <video
+        id="my-video"
+        class="video-js"
+        controls
+        preload="auto"
+        width="640"
+        height="264"
+        poster="MY_VIDEO_POSTER.jpg"
+        data-setup="{}"
+      >
+        <source src="<%= url_for(lesson.video) %>" type="video/mp4" />
+      </video>
+    <% else %>
+      <p>No video attached.</p>
+    <% end %>
+    
+  </p>
+
   <p class="my-5">
     <%= link_to 'edit', edit_lesson_path(lesson), class: 'btn btn-sm btn-primary' %>
   </p>
