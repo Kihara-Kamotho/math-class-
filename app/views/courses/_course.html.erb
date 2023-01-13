@@ -12,14 +12,14 @@
   </p>
 
   <p class="my-5">
-    <%= link_to 'edit', edit_course_path(course) %>
+    <%= link_to 'edit', edit_course_path(course), class: 'btn btn-sm btn-primary' %>
   </p>
 
   <p class="my-5">
-    <%= button_to 'delete', course_path(course), method: :delete %>
+    <%= button_to 'delete', course_path(course), method: :delete, class: 'btn btn-sm btn-danger' %>
   </p>
 
   <p class="my-5">
-    <%= link_to 'new section', new_course_section_url(@course) %>
+    <%= link_to 'new section', new_course_section_url(@course) , class: 'btn btn-sm btn-info' %>
   </p>
 </div>

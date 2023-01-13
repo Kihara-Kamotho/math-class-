@@ -12,15 +12,15 @@
   </p>
 
   <p class="my-5">
-    <%= link_to 'edit', edit_lesson_path(lesson) %>
+    <%= link_to 'edit', edit_lesson_path(lesson), class: 'btn btn-sm btn-primary' %>
   </p>
 
   <p class="my-5">
-    <%= button_to 'delete', lesson_path(lesson), method: :delete %>
+    <%= button_to 'delete', lesson_path(lesson), method: :delete, class: 'btn btn-sm btn-danger'%>
   </p>
 
   <p class="my-5">
-    <%= link_to 'back', root_path %>
+    <%= link_to 'back', root_path, class: 'btn btn-sm btn-error' %>
   </p>
 
 </div>

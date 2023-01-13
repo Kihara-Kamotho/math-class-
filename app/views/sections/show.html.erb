@@ -8,7 +8,7 @@
   <% unless @section.lessons.nil? %>
     <% @section.lessons.each do |lesson| %>
       <%= lesson.title %>
-      <%= link_to 'show', lesson_path(lesson) %>
+      <%= link_to 'show', lesson_path(lesson), class: 'btn btn-sm btn-accent' %>
     <% end %>
   <% end %>
 </div>

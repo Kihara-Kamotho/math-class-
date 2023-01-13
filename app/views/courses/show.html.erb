@@ -3,7 +3,7 @@
 </div>
 
 <div>
-  <%= link_to 'courses', courses_url %>
+  <%= link_to 'courses', courses_url, class: 'btn btn-sm btn-error' %>
 </div>
 
 <div>
@@ -13,7 +13,7 @@
     <% unless @course.sections.nil? %>
       <% @course.sections.each do |section| %>
         <%= section.title %>
-        <%= link_to 'show', section_path(section) %>
+        <%= link_to 'show', section_path(section) , class: 'btn btn-sm btn-accent' %>
       <% end %>
     <% end %>
   </div>

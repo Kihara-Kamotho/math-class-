@@ -4,9 +4,9 @@
   <%= course.title %>
   <%= course.description %>
   
-  <%= link_to 'show', course_path(course) %>
+  <%= link_to 'show', course_path(course) , class: 'btn btn-sm btn-accent' %>
 <% end %>
 
 <div>
-  <%= link_to 'new course', new_course_path %>
+  <%= link_to 'new course', new_course_path , class: 'btn btn-sm btn-info' %>
 </div>
