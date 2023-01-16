@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   root "courses#index"
   resources :courses do 
     resources :sections, shallow: true do 
-      resources :lessons 
+      resources :lessons do 
+        resources :comments 
+      end
     end
   end 
 end

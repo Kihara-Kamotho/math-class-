@@ -46,3 +46,31 @@
   </p>
 
 </div>
+
+<%# render comments to specific lesson %>
+
+<% if lesson.comments.any? %>
+  <h3>Comments</h3>
+    <div>
+      <% lesson.comments.each do |comment| %>
+        <%= comment.content %> by <i><%= current_user.email %></i>
+          <%# show created_at or updated_at %>
+          <div>
+            <%= comment.updated_at.utc.strftime("%c") %>
+          </div>
+
+          <%# only comment author can edit the comment %>
+          <% if comment.user == current_user %>
+            <div>
+            <%= link_to 'Edit', edit_comment_path(comment), locals: { comment: @comment } %>
+            <%= button_to 'Delete', comment_path, method: :delete %>
+            </div>
+          <% end %>
+      <% end %>
+    </div>
+<% else %>
+  <p>No comments are available</p>
+<% end %>
+
+<%# render comments/new form %>
+<%= render 'comments/form', locals: { lesson: @lesson} %>
