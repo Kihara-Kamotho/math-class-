@@ -53,7 +53,7 @@
   <h3>Comments</h3>
     <div>
       <% lesson.comments.each do |comment| %>
-        <%= comment.content %> by <i><%= current_user.name %></i>
+        <%= comment.content %> by <i><%= comment.user.name %></i>
           <%# show created_at or updated_at %>
           <div>
             <%= comment.updated_at.utc.strftime("%c") %>

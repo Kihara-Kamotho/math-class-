@@ -11,4 +11,9 @@ Rails.application.routes.draw do
       end
     end
   end 
+
+  # scope subscriptions under course 
+  resources :courses do  
+    resources :subscriptions
+  end
 end

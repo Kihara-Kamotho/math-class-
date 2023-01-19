@@ -22,4 +22,11 @@
   <p class="my-5">
     <%= link_to 'new section', new_course_section_url(@course) , class: 'btn btn-sm btn-info' %>
   </p>
+
+  <%# subscribe to course %>
+  <div>
+    <% unless course.subscribed %>
+      <%= link_to 'subscribe', new_course_subscription_url(@course), class: 'btn btn-sm btn-error' %>
+    <% end %>
+  </div>
 </div>

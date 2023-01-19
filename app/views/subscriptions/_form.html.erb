@@ -1,0 +1,17 @@
+<%= form_with(model: [course, Subscription.new]) do |form| %>
+  <div>
+    <%# hidden field for user %>
+    <%= form.hidden_field :user_id, :value => current_user.id %>
+  </div>
+
+  <div>
+    <%# hidden field for  %>
+  <%= form.hidden_field :course_id, :value => @course.id %>
+  </div>
+
+  <div>
+    <%# subscribed column should change to true on save %>
+  </div>
+
+  <%= form.submit class: 'btn btn-sm btn-accent' %>
+<% end %>
