@@ -15,8 +15,8 @@ class SubscriptionsController < ApplicationController
     
     if @subscription.save
       # switch subscription to true
-      @subscription.update({ subscribed: true })
-      @course.update({ subscribed: true })
+      @subscription.update!({ subscribed: true })
+      @course.update!({ subscribed: true })
       
       flash[:notice] = "Successfully created subscription." 
       redirect_to @course 
