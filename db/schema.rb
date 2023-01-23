@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_19_111617) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_19_132056) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -66,6 +66,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_111617) do
     t.index ["section_id"], name: "index_lessons_on_section_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.integer "amount", null: false
+    t.integer "phone"
+    t.integer "subscription_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_id"], name: "index_payments_on_subscription_id"
+  end
+
   create_table "sections", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -104,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_111617) do
   add_foreign_key "comments", "lessons"
   add_foreign_key "comments", "users"
   add_foreign_key "lessons", "sections"
+  add_foreign_key "payments", "subscriptions"
   add_foreign_key "sections", "courses"
   add_foreign_key "subscriptions", "courses"
   add_foreign_key "subscriptions", "users"

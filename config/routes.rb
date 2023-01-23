@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   # scope subscriptions under course 
   resources :courses do  
-    resources :subscriptions
+    resources :subscriptions, shallow: true do 
+      resources :payments, only: [:new, :create]  
+    end
   end
 end

@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController 
   before_action :set_course, except: [:show, :edit, :update, :destroy] 
+  # after_create_commit :pay 
 
   def index 
   # course_subscriptions
@@ -11,6 +12,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
+    console
     @subscription = @course.subscriptions.build(subscription_params)
     
     if @subscription.save
@@ -19,7 +21,7 @@ class SubscriptionsController < ApplicationController
       @course.update!({ subscribed: true })
       
       flash[:notice] = "Successfully created subscription." 
-      redirect_to @course 
+      redirect_to course_path @course 
     else
       render :new  
     end 
