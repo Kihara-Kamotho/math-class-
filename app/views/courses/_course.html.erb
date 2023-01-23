@@ -12,6 +12,11 @@
   </p>
 
   <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= course.amount %>
+  </p>
+
+  <p class="my-5">
     <%= link_to 'edit', edit_course_path(course), class: 'btn btn-sm btn-primary' %>
   </p>
 
@@ -25,8 +30,6 @@
 
   <%# subscribe to course %>
   <div>
-    <% unless course.subscribed %>
       <%= link_to 'subscribe', new_course_subscription_url(@course), class: 'btn btn-sm btn-error' %>
-    <% end %>
   </div>
 </div>
