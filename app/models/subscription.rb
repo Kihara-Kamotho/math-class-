@@ -7,8 +7,9 @@ class Subscription < ApplicationRecord
     subscription = Subscription.last
     user = subscription.user
     phone = user.phone
+    phone_no = PhonyRails.normalize_number(phone, country_code: 'KE').gsub(/\W/, '') 
 
-    payment = Payment.new(amount: amount, phone: phone, subscription_id: subscription.id)
+    payment = Payment.new(amount: amount, phone: phone_no, subscription_id: subscription.id)
     payment.save!
   end 
 
