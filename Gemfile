@@ -77,3 +77,12 @@ end
 # authentication 
 gem 'devise' 
 gem "tailwindcss-rails", "~> 2.0"
+
+# normalize phone number 
+gem 'phony_rails', '~> 0.15.0'
+
+# httparty
+gem 'httparty', '~> 0.21.0'
+
+# dotenv 
+gem 'dotenv', '~> 2.8', '>= 2.8.1'
