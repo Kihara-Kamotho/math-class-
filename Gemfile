@@ -86,3 +86,6 @@ gem 'httparty', '~> 0.21.0'
 
 # dotenv 
 gem 'dotenv', '~> 2.8', '>= 2.8.1'
+
+# solargraph 
+gem 'solargraph'
