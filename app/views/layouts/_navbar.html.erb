@@ -4,6 +4,7 @@
   <%# sign in links %>
   <div class='btn-group right-0'>
     <% if user_signed_in? %>
+      <span><%= current_user.name %></span>
       <%= button_to 'log out', destroy_user_session_path, method: :delete, class: 'btn btn-sm rounded'%> 
     <% else %>
       <%= link_to 'sign in', new_user_session_path, class: 'btn btn-sm' %>
