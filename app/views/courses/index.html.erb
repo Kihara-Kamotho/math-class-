@@ -7,6 +7,9 @@
   <%= link_to 'show', course_path(course) , class: 'btn btn-sm btn-accent' %>
 <% end %>
 
+<%# empty frame for new course %>
+<%= turbo_frame_tag Course.new %>
+
 <div>
-  <%= link_to 'new course', new_course_path , class: 'btn btn-sm btn-info' %>
+  <%= link_to 'new course', new_course_path , class: 'btn btn-sm btn-info', data: {turbo_frame: dom_id(Course.new)} %>
 </div>

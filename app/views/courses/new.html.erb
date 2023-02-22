@@ -1,4 +1,6 @@
 <div class='flex justify-center'>
-  <h3>New course</h3> 
-  <%= render 'form', course: @course %>
+  <%= turbo_frame_tag @course do %>
+    <h3>New course</h3> 
+    <%= render 'form', course: @course %>
+  <% end %>
 </div>
