@@ -3,7 +3,10 @@ class CoursesController < ApplicationController
 
   def index 
     # all courses 
-    @courses = Course.all
+    @courses = Course.all.includes(:sections)
+    @q = Course.ransack(params[:q])
+    @courses = @q.result(distinct: true)
+  
   end 
 
   def new 
