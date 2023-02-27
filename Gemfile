@@ -89,3 +89,4 @@ gem 'dotenv', '~> 2.8', '>= 2.8.1'
 
 # solargraph 
 gem 'solargraph'
+gem "ransack", "~> 4.0"
