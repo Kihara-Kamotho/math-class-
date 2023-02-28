@@ -1,3 +1,5 @@
 <div>
-  <%= render 'form', course: @course, subscription: @subscription %>
+  <%= turbo_frame_tag 'subscribe' do %>
+    <%= render 'form', course: @course, subscription: @subscription %>
+  <% end %>
 </div>

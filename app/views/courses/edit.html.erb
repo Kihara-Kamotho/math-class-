@@ -1,3 +1,5 @@
 <h3>Edit course</h3> 
 
-<%= render 'form', course: @course %>
+<%= turbo_frame_tag 'edit-course' do %>
+  <%= render 'form', course: @course %>
+<% end %>

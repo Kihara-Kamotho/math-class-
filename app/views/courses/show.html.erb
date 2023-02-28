@@ -3,17 +3,18 @@
 </div>
 
 <div>
-  <%= link_to 'courses', courses_url, class: 'btn btn-sm btn-error' %>
+  <%= link_to 'back', courses_url, class: 'btn btn-sm btn-error' %>
 </div>
 
 <div>
-  <h3><%= pluralize(@course.sections.count, 'section') %></h3>
 
   <div>
-    <% unless @course.sections.nil? %>
-      <% @course.sections.each do |section| %>
-        <%= section.title %>
-        <%= link_to 'show', section_path(section) , class: 'btn btn-sm btn-accent' %>
+    <% if @course.sections.any? %>
+
+      <h3><%= pluralize(@course.sections.count, 'section') %></h3>
+      
+      <%= turbo_frame_tag 'sections' do %>
+        <%= link_to 'sections', course_sections_path(@course), class: 'btn btn-sm btn-accent' %>
       <% end %>
     <% end %>
   </div>

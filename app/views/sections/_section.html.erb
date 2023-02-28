@@ -1,5 +1,4 @@
 <div id="<%= dom_id section %>">
-  <h3>Section</h3>
   
   <p class="my-5">
     <strong class="block font-medium mb-1">Name:</strong>
@@ -12,6 +11,10 @@
   </p>
 
   <p class="my-5">
+    <%= link_to 'show', section_path(section), class: 'btn btn-sm btn-primary' %>
+  </p>
+
+  <p class="my-5">
     <%= link_to 'edit', edit_section_path(section), class: 'btn btn-sm btn-primary' %>
   </p>
 
@@ -20,7 +23,7 @@
   </p>
 
   <p class="my-5">
-    <%= link_to 'new lesson', new_section_lesson_path(@section), class: 'btn btn-sm btn-info' %>
+    <%#= link_to 'new lesson', new_section_lesson_path(@section), class: 'btn btn-sm btn-info' %>
   </p>
 
   <p class="my-5">

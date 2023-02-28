@@ -17,7 +17,9 @@
   </p>
 
   <p class="my-5">
-    <%= link_to 'edit', edit_course_path(course), class: 'btn btn-sm btn-primary' %>
+    <%= turbo_frame_tag 'edit-course' do %>
+      <%= link_to 'edit', edit_course_path(course), class: 'btn btn-sm btn-primary' %>
+    <% end %>
   </p>
 
   <p class="my-5">
@@ -25,11 +27,15 @@
   </p>
 
   <p class="my-5">
-    <%= link_to 'new section', new_course_section_url(@course) , class: 'btn btn-sm btn-info' %>
+    <%= turbo_frame_tag 'new-section' do %>
+      <%= link_to 'new section', new_course_section_url(@course) , class: 'btn btn-sm btn-info' %>    
+    <% end %>
   </p>
 
   <%# subscribe to course %>
   <div>
-      <%= link_to 'subscribe', new_course_subscription_url(@course), class: 'btn btn-sm btn-error' %>
+      <%= turbo_frame_tag 'subscribe' do %>
+        <%= link_to 'subscribe', new_course_subscription_url(@course), class: 'btn btn-sm btn-error' %>
+      <% end %>
   </div>
 </div>
