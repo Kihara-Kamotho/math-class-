@@ -1,4 +1,4 @@
-<h3>Courses</h3> 
+<h1>Courses</h1> 
 
 <%# search %>
 <%= search_form_for @q, data: {turbo_frame: :courses} do |f| %>
@@ -12,10 +12,12 @@
 <%= turbo_frame_tag :courses do %>
 
   <% @courses.each do |course| %>
-    <%= course.title %>
-    <%= course.description %>
-    
-    <%= link_to 'show', course_path(course) , class: 'btn btn-sm btn-accent' %>
+    <div class='mb-3'>
+      <%= course.title %>
+      <%= course.description %>
+      
+      <%= link_to 'show', course_path(course) , class: 'btn btn-sm btn-accent' %>
+    </div>
   <% end %>
 <% end %>
 

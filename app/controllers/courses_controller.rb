@@ -16,11 +16,14 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
 
-    if @course.save 
-      flash[:notice] = 'Course created successfully.'
-      redirect_to course_path @course 
-    else 
-      render :new 
+    respond_to do |format|
+
+      if @course.save 
+        format.turbo_stream
+        format.html { redirect_to course_path @course, flash[:notice] = 'Course created successfully.'} 
+      else 
+        render :new 
+      end
     end
   end
 

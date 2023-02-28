@@ -1,0 +1,2 @@
+<%= turbo_stream.append 'courses', partial: 'courses/course', locals: { course: @course} %>
+<%= turbo_stream.update Course.new, "" %>
