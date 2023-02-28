@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
     # all courses 
     @courses = Course.all.includes(:sections)
     @q = Course.ransack(params[:q])
-    @courses = @q.result(distinct: true)
+    @pagy, @courses = pagy(@q.result(distinct: true), items: 7)
   
   end 
 

@@ -8,6 +8,10 @@
   <%= f.search_field :title_cont, oninput: 'this.form.requestSubmit()', autofocus: true, autocomplete: 'off' %>
 <% end %>
 
+<%# pagy nav %>
+<div class='m-3'>
+  <%== pagy_nav(@pagy) %>
+</div>
 
 <%= turbo_frame_tag :courses do %>
 
@@ -21,6 +25,9 @@
   <% end %>
 <% end %>
 
+<div class='m-3'>
+  <%== pagy_nav(@pagy) %>
+</div>
 
 <%# empty frame for new course %>
 <%= turbo_frame_tag Course.new %>
