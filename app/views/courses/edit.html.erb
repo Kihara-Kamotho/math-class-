@@ -2,4 +2,5 @@
 
 <%= turbo_frame_tag 'edit-course' do %>
   <%= render 'form', course: @course %>
+  <%= link_to 'cancel', course_url(@course), class: 'btn btn-sm btn btn-light m-2' %>
 <% end %>
