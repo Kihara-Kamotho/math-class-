@@ -2,6 +2,11 @@
 
 <div>
   <%= turbo_frame_tag 'sections' do %>
-    <%= render @sections %>
+
+    <% @sections.each do |section| %> 
+      <div>
+        <%= link_to section.title, section %>
+      </div>
+    <% end %>
   <% end %>
 </div>

@@ -11,11 +11,9 @@
   </p>
 
   <p class="my-5">
-    <%= link_to 'show', section_path(section), class: 'btn btn-sm btn-primary' %>
-  </p>
-
-  <p class="my-5">
-    <%= link_to 'edit', edit_section_path(section), class: 'btn btn-sm btn-primary' %>
+    <%= turbo_frame_tag 'edit-section' do %>
+      <%= link_to 'edit', edit_section_path(section), class: 'btn btn-sm btn-primary' %>
+    <% end %>
   </p>
 
   <p class="my-5">
@@ -24,10 +22,6 @@
 
   <p class="my-5">
     <%#= link_to 'new lesson', new_section_lesson_path(@section), class: 'btn btn-sm btn-info' %>
-  </p>
-
-  <p class="my-5">
-    <%= link_to 'back', root_path, class: 'btn btn-sm btn-error' %>
   </p>
 
 </div>
