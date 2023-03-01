@@ -34,19 +34,25 @@ class CoursesController < ApplicationController
   end 
 
   def update 
-    if @course.update(course_params) 
-      flash[:notice] = 'Course updated.' 
-      redirect_to course_path @course 
-    else 
-      render :edit 
+    respond_to do |format| 
+
+      if @course.update(course_params) 
+        format.turbo_stream 
+        format.html { redirect_to course_path @course, flash[:notice] = 'Course updated.' } 
+      else 
+        render :edit 
+      end 
     end 
   end 
 
   def destroy 
-    if @course.delete 
-      flash[:notice] = 'Course deleted.' 
-      redirect_to courses_path 
-    end 
+    respond_to do |format|  
+
+      if @course.delete 
+        format.html { redirect_to courses_path, flash[:notice] = 'Course deleted.' }  
+        format.turbo_stream
+      end 
+    end
   end
 
   private 

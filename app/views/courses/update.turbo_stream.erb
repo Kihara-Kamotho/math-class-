@@ -1,0 +1,3 @@
+<%= turbo_stream.update @course do %>
+  <%= render partial: 'courses/course', locals: { course: @course } %>
+<% end %>

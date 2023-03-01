@@ -13,6 +13,9 @@
   <%== pagy_nav(@pagy) %>
 </div>
 
+<%# stream frm channel course %>
+<%= turbo_stream_from 'courses' %>
+
 <%= turbo_frame_tag :courses do %>
 
   <% @courses.each do |course| %>
