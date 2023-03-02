@@ -31,12 +31,15 @@ class LessonsController < ApplicationController
   end 
 
   def update 
-    if @lesson.update(lesson_params)
-      flash[:notice] = 'Lesson updated.'
-      redirect_to lesson_path @lesson 
-    else 
-      render :edit
-    end 
+    respond_to do |format|
+
+      if @lesson.update(lesson_params)
+        format.html { redirect_to lesson_path @lesson, flash[:notice] = 'Lesson updated.' }
+        format.turbo_stream
+      else 
+        render :edit
+      end
+    end  
   end 
 
   def destroy 

@@ -1,0 +1,46 @@
+<div id="<%= dom_id lesson %>">
+  <h3>Lesson</h3>
+  
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= lesson.title %>
+  </p>
+
+    <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= lesson.description %>
+  </p>
+
+  <p class="my-5"> 
+    <strong class="block font-medium mb-1">Video:</strong>
+    <% if lesson.video.attached? %>
+      <%# videojs %>
+      <video
+        id="my-video"
+        class="video-js"
+        controls
+        preload="auto"
+        width="640"
+        height="264"
+        poster="MY_VIDEO_POSTER.jpg"
+        data-setup="{}"
+      >
+        <source src="<%= url_for(lesson.video) %>" type="video/mp4" />
+      </video>
+    <% else %>
+      <p>No video attached.</p>
+    <% end %>
+    
+  </p>
+
+  <p class="my-5">
+    <%= turbo_frame_tag 'edit-lesson' do %>
+      <%= link_to 'edit', edit_lesson_path(lesson), class: 'btn btn-sm btn-primary' %>
+    <% end %>
+  </p>
+
+  <p class="my-5">
+    <%= button_to 'delete', lesson_path(lesson), method: :delete, class: 'btn btn-sm btn-danger'%>
+  </p>
+
+</div>

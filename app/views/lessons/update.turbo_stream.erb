@@ -1,0 +1,3 @@
+<%= turbo_stream.update @lesson do %>
+  <%= render partial: 'lessons/updated_lesson', locals: {lesson: @lesson} %>
+<% end %>
