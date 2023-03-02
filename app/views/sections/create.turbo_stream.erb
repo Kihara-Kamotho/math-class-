@@ -1,0 +1,2 @@
+<%= turbo_stream.append 'sections', partial: 'sections/section', locals: {section: @section} %>
+<%= turbo_stream.update Section.new, "" %>

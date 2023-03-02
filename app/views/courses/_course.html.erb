@@ -27,9 +27,10 @@
   </p>
 
   <p class="my-5">
-    <%= turbo_frame_tag 'new-section' do %>
-      <%= link_to 'new section', new_course_section_url(course) , class: 'btn btn-sm btn-info' %>    
-    <% end %>
+    <%# empty frame %>
+    <%= turbo_frame_tag Section.new %>
+
+    <%= link_to 'new section', new_course_section_url(course) , class: 'btn btn-sm btn-info', data: {turbo_frame: dom_id(Section.new)} %>    
   </p>
 
   <%# subscribe to course %>

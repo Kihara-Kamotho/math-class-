@@ -14,12 +14,15 @@ class SectionsController < ApplicationController
   def create 
     @section = @course.sections.build(section_params)
 
-    if @section.save
-      flash[:notice] = 'Section created successfully.'
-      redirect_to section_path @section 
-    else 
-      render :new 
-    end
+    respond_to do |format| 
+
+      if @section.save
+        format.turbo_stream 
+        format.html { redirect_to section_path(@section), flash[:notice] = 'Section created successfully.' } 
+      else 
+        render :new 
+      end
+    end 
   end
 
   def show 

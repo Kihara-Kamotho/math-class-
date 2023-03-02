@@ -1,5 +1,5 @@
 <div>
-  <%= turbo_frame_tag 'new-section' do %>
+  <%= turbo_frame_tag @section do %>
 
     <h3>New section</h3>
     <%= render 'form', course: @course, section: @section %>
