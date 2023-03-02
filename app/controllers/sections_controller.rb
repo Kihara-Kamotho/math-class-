@@ -32,12 +32,15 @@ class SectionsController < ApplicationController
   end 
 
   def update 
-    if @section.update(section_params) 
-      flash[:notice] = 'Section updated successfully.' 
-      redirect_to section_path(@section) 
-    else 
-      render :edit 
-    end
+    respond_to do |format|
+
+      if @section.update(section_params) 
+        format.html { redirect_to section_path(@section), flash[:notice] = 'Section updated successfully.' }
+         format.turbo_stream
+      else 
+        render :edit 
+      end
+    end 
   end
 
   def destroy 
