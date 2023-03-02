@@ -1,0 +1,10 @@
+<div>
+  <%= turbo_frame_tag 'lessons' do %>
+    <% @lessons.each do |lesson| %>
+      <div>
+        <strong>Lesson Title</strong>
+        <%= link_to lesson.title, lesson_path(lesson) %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
