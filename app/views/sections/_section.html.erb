@@ -21,7 +21,9 @@
   </p>
 
   <p class="my-5">
-    <%#= link_to 'new lesson', new_section_lesson_path(@section), class: 'btn btn-sm btn-info' %>
+    <%= turbo_frame_tag 'new-lesson' do %>
+      <%= link_to 'new lesson', new_section_lesson_path(section), class: 'btn btn-sm btn-info' %>
+    <% end %>
   </p>
 
 </div>

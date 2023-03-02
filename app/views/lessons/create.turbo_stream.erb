@@ -1,0 +1,2 @@
+<%= turbo_stream.append 'lessons', partial: 'lessons/created_lesson', locals: {lesson: @lesson} %>
+<%= turbo_stream.update 'new-lesson', "" %>
