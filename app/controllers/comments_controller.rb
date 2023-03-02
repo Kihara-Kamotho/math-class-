@@ -14,12 +14,15 @@ class CommentsController < ApplicationController
   def create 
     @comment = @lesson.comments.build(comment_params)
 
-    if @comment.save
-      flash[:notice] = 'Comment was successfully created.'
-      redirect_to comment_path(@comment) 
-    else 
-      render :new 
-    end
+    respond_to do |format|
+
+      if @comment.save
+        format.turbo_stream
+        format.html { redirect_to redirect_to comment_path(@comment), flash[:notice] = 'Comment was successfully created.'}
+      else 
+        render :new 
+      end
+    end 
   end
 
   def show 
