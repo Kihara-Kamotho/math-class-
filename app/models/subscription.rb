@@ -1,5 +1,8 @@
 class Subscription < ApplicationRecord 
 
+  # validations 
+  validates :expires_at, presence: true
+
   # after_create :initialize_payment 
   after_create_commit do 
     # initialize a payment object 
@@ -16,4 +19,9 @@ class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :course
   has_one :payment
+
+  # method to check if subscription has expired 
+  def expired?
+    expires_at < DateTime.now
+  end
 end
