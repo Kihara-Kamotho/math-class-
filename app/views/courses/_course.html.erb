@@ -36,7 +36,9 @@
   <%# subscribe to course %>
   <div>
       <%= turbo_frame_tag 'subscribe' do %>
-        <%= link_to 'subscribe', new_course_subscription_url(course), class: 'btn btn-sm btn-error' %>
+        <% unless course.subscribed? %>
+          <%= link_to 'subscribe', new_course_subscription_url(course), class: 'btn btn-sm btn-error' %>
+        <% end %>
       <% end %>
   </div>
 </div>

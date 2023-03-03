@@ -1,10 +1,11 @@
 class SectionsController < ApplicationController 
   before_action :set_course, except: [:show, :edit, :update, :destroy] 
+  
   before_action :set_section, only: [:show, :edit, :update, :destroy] 
 
   def index 
     # display all sections belonging to a course 
-    @pagy, @sections = pagy(@course.sections, items: 3)
+    @pagy, @sections = pagy(subscribed_course.sections, items: 3)
   end 
 
   def new 
@@ -62,4 +63,9 @@ class SectionsController < ApplicationController
   def set_section 
     @section = Section.find(params[:id])
   end
+
+  def subscribed_course
+    current_user.subscriptions.find_by(course_id: params[:course_id])&.course
+  end
+  
 end
