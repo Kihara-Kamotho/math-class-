@@ -1,5 +1,9 @@
 <div>
   <%= turbo_frame_tag 'lessons' do %>
+      
+    <%# pagy %>
+    <%== pagy_nav(@pagy) %>
+    
     <% @lessons.each do |lesson| %>
       <div>
         <strong>Lesson Title</strong>

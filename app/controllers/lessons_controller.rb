@@ -3,7 +3,7 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
 
   def index 
-    @lessons = @section.lessons
+    @pagy, @lessons = pagy(@section.lessons, items: 3)
   end
 
   def new 
