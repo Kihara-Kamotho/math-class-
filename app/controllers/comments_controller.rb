@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController 
 
   before_action :set_lesson, except: [:show, :edit, :update, :destroy]
+
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   def index 
@@ -41,8 +42,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy 
-    @comment.destroy
-    redirect_to root_path 
+    respond_to do |format|
+
+      if @comment.destroy
+        format.turbo_stream
+      end  
+    end
   end 
   
   private 
