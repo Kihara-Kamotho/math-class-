@@ -12,8 +12,9 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    console
+    # console
     @subscription = @course.subscriptions.build(subscription_params)
+    @subscription.expires_at = DateTime.now + 1.month
     
     if @subscription.save
       # send notification 
