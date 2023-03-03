@@ -47,6 +47,9 @@
 
 <%# render comments to specific lesson %>
 <div id='comments'>
+  <%# stream from channel comments %>
+  <%= turbo_stream_from 'comments' %>
+  
   <% if lesson.comments.any? %>
     <h3>Comments</h3>
       <div>
@@ -60,8 +63,10 @@
             <%# only comment author can edit the comment %>
             <% if comment.user == current_user %>
               <div>
-              <%= link_to 'Edit', edit_comment_path(comment), locals: { comment: @comment } %>
-              <%= button_to 'Delete', comment_path, method: :delete %>
+              <%= turbo_frame_tag 'edit-comment' do %>
+                <%= link_to 'Edit', edit_comment_path(comment), locals: { comment: @comment } %>
+                <%= button_to 'Delete', comment, method: :delete, data: {turbo_frame: '_top'} %>
+              <% end %>
               </div>
             <% end %>
         <% end %>

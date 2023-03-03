@@ -33,11 +33,14 @@ class CommentsController < ApplicationController
   end 
 
   def update 
-    if @comment.update(comment_params)
-      flash[:notice] = 'Comment was successfully updated.'
-      redirect_to comment_path(@comment)  
-    else 
-      render :edit 
+    respond_to do |format|
+
+      if @comment.update(comment_params)
+        format.turbo_stream
+        format.html { redirect_to comment_path(@comment), flash[:notice] = 'Comment was successfully updated.' }
+      else 
+        render :edit 
+      end
     end 
   end
 
