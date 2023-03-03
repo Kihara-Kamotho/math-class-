@@ -5,5 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :subscriptions
+  has_many :courses, through: :subscriptions
   has_many :payments, through: :subscriptions 
+
+  # check if a user is subscribed to a specified course
+  def subscribed_to?(course)
+    courses.exists?(course.id) 
+  end 
 end

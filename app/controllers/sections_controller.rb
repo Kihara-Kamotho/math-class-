@@ -67,5 +67,4 @@ class SectionsController < ApplicationController
   def subscribed_course
     current_user.subscriptions.find_by(course_id: params[:course_id])&.course
   end
-  
 end

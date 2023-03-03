@@ -5,7 +5,7 @@
 <div>
 
   <div>
-    <% if @course.subscribed && @course.sections.any? %>
+    <% if current_user.subscribed_to?(@course) && @course.sections.any? %>
 
       <h3><%= pluralize(@course.sections.count, 'section') %></h3>
       
