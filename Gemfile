@@ -94,3 +94,5 @@ gem "ransack", "~> 4.0"
 gem "pagy", "~> 6.0"
 
 gem "noticed", "~> 1.6"
+
+gem "faraday", "~> 2.7"
