@@ -3,6 +3,8 @@
 <div>
   <%= turbo_frame_tag 'sections' do %>
 
+    <%# pagy %>
+    <%== pagy_nav(@pagy) %>
     <% @sections.each do |section| %> 
       <div>
         <%= link_to section.title, section %>

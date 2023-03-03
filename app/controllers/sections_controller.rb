@@ -4,7 +4,7 @@ class SectionsController < ApplicationController
 
   def index 
     # display all sections belonging to a course 
-    @sections = @course.sections
+    @pagy, @sections = pagy(@course.sections, items: 3)
   end 
 
   def new 
