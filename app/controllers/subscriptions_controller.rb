@@ -16,6 +16,9 @@ class SubscriptionsController < ApplicationController
     @subscription = @course.subscriptions.build(subscription_params)
     
     if @subscription.save
+      # send notification 
+      SubscriptionNotification.with(subsription: @subscription).deliver_later(current_user)
+      
       # switch subscription to true
       @subscription.update!({ subscribed: true })
       @course.update!({ subscribed: true })

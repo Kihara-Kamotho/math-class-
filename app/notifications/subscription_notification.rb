@@ -9,7 +9,7 @@ class SubscriptionNotification < Noticed::Base
   # deliver_by :database
   # deliver_by :email, mailer: "UserMailer"
   # deliver_by :slack
-  # deliver_by :custom, class: "MyDeliveryMethod"
+  deliver_by :custom, class: "DeliveryMethods::AfricasTalking"
 
   # Add required params
   #
@@ -17,9 +17,10 @@ class SubscriptionNotification < Noticed::Base
 
   # Define helper methods to make rendering easier.
   #
-  # def message
-  #   t(".message")
-  # end
+  def message
+    # t(".message")
+    "Subscribed to course #{@subscription.course}"
+  end
   #
   # def url
   #   post_path(params[:post])
