@@ -92,3 +92,5 @@ gem 'solargraph'
 gem "ransack", "~> 4.0"
 
 gem "pagy", "~> 6.0"
+
+gem "noticed", "~> 1.6"
