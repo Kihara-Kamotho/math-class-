@@ -19,7 +19,7 @@ class SubscriptionNotification < Noticed::Base
   #
   def message
     # t(".message")
-    "Subscribed to course #{@subscription.course}"
+    "Subscribed to course."
   end
   #
   # def url

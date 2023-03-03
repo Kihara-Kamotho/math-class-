@@ -14,4 +14,13 @@
       <% end %>
     <% end %>
   </div>
+
+    <%# subscribe to course %>
+  <div>
+      <%= turbo_frame_tag 'subscribe' do %>
+        <% unless current_user.subscribed_to?(@course) %>
+          <%= link_to 'subscribe', new_course_subscription_url(@course), class: 'btn btn-sm btn-error' %>
+        <% end %>
+      <% end %>
+  </div>
 </div>
