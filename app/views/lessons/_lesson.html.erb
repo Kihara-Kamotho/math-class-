@@ -83,16 +83,21 @@
   <div class="flex-1">
     <% if @lesson.questions.any? %>
       <h3>Questions</h3>
-      <% @lesson.questions.each do |question| %>
-        <%= turbo_frame_tag 'question' do %>
-          <%= link_to question.title, question %>
-        <% end %>
-      <% end %>
+      <div id='questions'>
 
-      <div>
-        <%# new qn %>
-        <%= turbo_frame_tag Question.new %>
-        <%= link_to 'new qn', new_lesson_question_path(@lesson), class: 'btn btn-sm btn-accent', data: {turbo_frame: dom_id(Question.new)} %>
+        <% @lesson.questions.each do |question| %>
+          <%= turbo_frame_tag 'question' do %>
+            <div>
+              <%= link_to question.title, question %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <div>
+          <%# new qn %>
+          <%= turbo_frame_tag Question.new %>
+          <%= link_to 'new qn', new_lesson_question_path(@lesson), class: 'btn btn-sm btn-accent', data: {turbo_frame: dom_id(Question.new)} %>
+        </div>
       </div>
     <% end %>
   </div>

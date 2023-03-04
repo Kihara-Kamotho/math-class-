@@ -15,11 +15,15 @@ class QuestionsController < ApplicationController
   def create 
     @question = @lesson.questions.build(question_params)
 
-    if @question.save 
-      # turbo_stream 
-    else 
-      render :new 
-    end 
+    respond_to do |format|
+      
+      if @question.save 
+        # turbo_stream 
+        format.turbo_stream 
+      else 
+        render :new 
+      end
+    end
   end
 
   def show
