@@ -1,0 +1,8 @@
+<div>
+  <% @questions.each do |question| %>
+    <%= link_to question.title, question %>
+  <% end %>
+</div>
+
+<%# new qn %>
+<%= link_to 'new qn', new_lesson_question_path(@lesson) %>

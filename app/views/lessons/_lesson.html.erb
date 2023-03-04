@@ -80,3 +80,8 @@
   <%# render comments/new form %>
   <%= render 'comments/form', locals: { lesson: @lesson} %>
 </div>
+
+<%# render questions  %>
+<%= link_to 'lesson questions', lesson_questions_path(lesson) %>
+
+<%#= render template: 'questions/index' %>
