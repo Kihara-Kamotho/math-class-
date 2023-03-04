@@ -16,7 +16,7 @@
 
   <%# answer the qn %>
   <%= turbo_frame_tag 'answer' do %>
-    <%= link_to 'ans', new_question_answer_path(@question) %>
+    <%= link_to 'ans', new_question_answer_path(@question), class: 'btn btn-sm m-3' %>
   <% end %>
 <% end %>
 

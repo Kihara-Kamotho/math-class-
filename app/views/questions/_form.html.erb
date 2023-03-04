@@ -11,6 +11,7 @@
       <%= form.text_field :body, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
 
-    <%= form.submit %>
+    <%= link_to 'cancel', lesson_path(@lesson), class: 'btn btn-sm' %>
+    <%= form.submit class: 'btn btn-sm m-3' %>
   <% end %>
 </div>
