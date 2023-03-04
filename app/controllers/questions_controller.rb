@@ -44,9 +44,12 @@ class QuestionsController < ApplicationController
   end 
 
   def destroy 
-    if @question.destroy 
-      # turbo_stream 
-    end 
+    respond_to do |format|
+      
+      if @question.destroy 
+        format.turbo_stream
+      end 
+    end
   end 
 
   private 
