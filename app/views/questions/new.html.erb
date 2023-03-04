@@ -1,0 +1,7 @@
+<div>
+  <%= turbo_frame_tag @question do %>
+    <h2>Post a question</h2>
+
+    <%= render 'form', lesson: @lesson, question: @question %>
+  <% end %>
+</div>

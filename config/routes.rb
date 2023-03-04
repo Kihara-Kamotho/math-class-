@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     resources :sections, shallow: true do 
       resources :lessons do 
         resources :comments 
+        resources :questions do 
+          resources :answers
+        end
       end
     end
   end 
