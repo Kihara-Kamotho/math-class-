@@ -82,6 +82,14 @@
 </div>
 
 <%# render questions  %>
-<%= link_to 'lesson questions', lesson_questions_path(lesson) %>
-
+<div>
+  <% if @lesson.questions.any? %>
+    <h3>Questions</h3>
+    <% @lesson.questions.each do |question| %>
+      <%= turbo_frame_tag 'question' do %>
+        <%= link_to question.title, question %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
 <%#= render template: 'questions/index' %>

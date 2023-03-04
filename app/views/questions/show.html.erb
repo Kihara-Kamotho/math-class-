@@ -1,17 +1,22 @@
-<div>
-  <%= render @question %>
-</div>
+<%= turbo_frame_tag 'question' do %>
+  <div>
+    <%= render @question %>
+  </div>
 
-<%# answers %>
-<% unless  @question.answers.nil? %>
-  <h2><%= pluralize(@question.answers.count, 'answer')%></h2>
+  <%# answers %>
+  <% unless  @question.answers.nil? %>
+    <h2><%= pluralize(@question.answers.count, 'answer')%></h2>
 
-  <% @question.answers.each do |ans| %>
-    <div>
-        <%= ans.body %>
-    </div>
+    <% @question.answers.each do |ans| %>
+      <div>
+          <%= ans.body %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# answer the qn %>
+  <%= turbo_frame_tag 'answer' do %>
+    <%= link_to 'ans', new_question_answer_path(@question) %>
   <% end %>
 <% end %>
 
-<%# answer the qn %>
-<%= link_to 'ans', new_question_answer_path(@question) %>
