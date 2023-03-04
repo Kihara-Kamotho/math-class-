@@ -33,6 +33,14 @@ class QuestionsController < ApplicationController
   end 
 
   def update 
+    respond_to do |format|
+
+      if @question.update(question_params) 
+        format.turbo_stream 
+      else 
+        render :edit 
+      end
+    end 
   end 
 
   def destroy 
