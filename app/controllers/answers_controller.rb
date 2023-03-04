@@ -15,10 +15,13 @@ class AnswersController < ApplicationController
   def create 
     @answer = @question.answers.build(answer_params)
 
-    if @answer.save 
-      # turbo_stream 
-    else 
-      render :new 
+    respond_to do |format| 
+      if @answer.save 
+        # turbo_stream 
+        format.turbo_stream
+      else 
+        render :new 
+      end
     end 
   end 
 

@@ -1,5 +1,5 @@
 <div>
-  <%= turbo_frame_tag 'answer' do %>
+  <%= turbo_frame_tag @answer do %>
     <h2>Answer this question</h2>
     <%= render 'form', question: @question, answer: @answer %>
   <% end %>

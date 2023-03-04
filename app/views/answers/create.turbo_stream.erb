@@ -1,0 +1,2 @@
+<%= turbo_stream.append 'answers', partial: 'answers/answer', locals: {answer: @answer} %>
+<%= turbo_stream.update Answer.new, "" %>

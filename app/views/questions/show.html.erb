@@ -14,16 +14,17 @@
   <% unless  @question.answers.nil? %>
     <h2><%= pluralize(@question.answers.count, 'answer')%></h2>
 
-    <% @question.answers.each do |ans| %>
-      <div>
-          <%= ans.body %>
-      </div>
-    <% end %>
+    <div id='answers'>
+      <% @question.answers.each do |ans| %>
+        <div>
+            <%= ans.body %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 
   <%# answer the qn %>
-  <%= turbo_frame_tag 'answer' do %>
-    <%= link_to 'ans', new_question_answer_path(@question), class: 'btn btn-sm m-3' %>
-  <% end %>
+  <%= turbo_frame_tag Answer.new %>
+    <%= link_to 'ans', new_question_answer_path(@question), class: 'btn btn-sm m-3', data: {turbo_frame: dom_id(Answer.new)} %>
 <% end %>
 
