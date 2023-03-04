@@ -14,6 +14,9 @@
   <% unless  @question.answers.nil? %>
     <h2><%= pluralize(@question.answers.count, 'answer')%></h2>
 
+    <%# broadcast to answers channel %>
+    <%= turbo_stream_from 'answers' %>
+    
     <div id='answers'>
       <% @question.answers.each do |ans| %>
         <div>

@@ -81,6 +81,9 @@
   <%# q & a %>
   <%# render questions  %>
   <div class="flex-1">
+    <%# stream from questions channel %>
+    <%= turbo_stream_from 'questions' %>
+    
     <% if @lesson.questions.any? %>
       <h3>Questions</h3>
       <div id='questions'>
