@@ -48,6 +48,6 @@ class SubscriptionsController < ApplicationController  # rubocop:disable Style/D
   end
 
   def subscription_params
-    params.require(:subscription).permit(:user_id, :course_id, :subscribed)
+    params.require(:subscription).permit(:user_id, :course_id, :subscribed, :status)
   end
 end

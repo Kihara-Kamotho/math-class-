@@ -8,6 +8,9 @@ class Subscription < ApplicationRecord # rubocop:disable Style/Documentation
   belongs_to :course
   has_one :payment
 
+  # enum of subscription state
+  enum status: { inactive: 0, active: 1 }
+
   # after_create :initialize_payment
   after_create_commit do |record|
     # initialize a payment object
