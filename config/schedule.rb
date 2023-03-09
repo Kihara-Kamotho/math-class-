@@ -17,4 +17,8 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
+every 1.day, at: '09:00am' do
+  runner 'SubscriptionExpirationReminderJob:perform_later'
+end
+
 # Learn more: http://github.com/javan/whenever
