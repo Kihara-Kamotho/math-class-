@@ -1,67 +1,62 @@
-class QuestionsController < ApplicationController 
+# frozen_string_literal: true
 
-  before_action :set_lesson, only: [:index, :new, :create] 
+class QuestionsController < ApplicationController # rubocop:disable Style/Documentation
+  before_action :set_lesson, only: %i[index new create]
 
-  before_action :set_question, except: [:index, :new, :create]
+  before_action :set_question, except: %i[index new create]
 
-  def index 
+  def index
     @questions = @lesson.questions
   end
 
-  def new 
+  def new
     @question = @lesson.questions.new
   end
 
-  def create 
+  def create
     @question = @lesson.questions.build(question_params)
 
     respond_to do |format|
-      
-      if @question.save 
-        # turbo_stream 
-        format.turbo_stream 
-      else 
-        render :new 
+      if @question.save
+        # turbo_stream
+        format.turbo_stream
+      else
+        render :new
       end
     end
   end
 
-  def show
-  end 
+  def show; end
 
-  def edit 
-  end 
+  def edit; end
 
-  def update 
+  def update
     respond_to do |format|
-
-      if @question.update(question_params) 
-        format.turbo_stream 
-      else 
-        render :edit 
-      end
-    end 
-  end 
-
-  def destroy 
-    respond_to do |format|
-      
-      if @question.destroy 
+      if @question.update(question_params)
         format.turbo_stream
-      end 
+      else
+        render :edit
+      end
     end
-  end 
+  end
 
-  private 
-  def set_lesson 
+  def destroy
+    respond_to do |format|
+      format.turbo_stream if @question.destroy
+    end
+  end
+
+  private
+
+  def set_lesson
     @lesson = Lesson.find_by(params[:lesson_id])
   end
 
-  def question_params 
-    params.require(:question).permit(:title, :body) 
-  end 
+  def question_params
+    params.require(:question).permit(:title, :body)
+  end
 
-  def set_question 
+  def set_question
     @question = Question.find(params[:id])
   end
 end
