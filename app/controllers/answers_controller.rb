@@ -1,49 +1,50 @@
-class AnswersController < ApplicationController 
+# frozen_string_literal: true
 
-  before_action :set_question, only: [:index, :new, :create] 
+class AnswersController < ApplicationController # rubocop:disable Style/Documentation
+  before_action :set_question, only: %i[index new create]
 
-  before_action :set_answer, except: [:index, :new, :create]
+  before_action :set_answer, except: %i[index new create]
 
   def index
     @answers = @question.answers
-  end 
+  end
 
-  def new 
+  def new
     @answer = @question.answers.new
-  end 
+  end
 
-  def create 
+  def create
     @answer = @question.answers.build(answer_params)
 
-    if @answer.save 
-      # turbo_stream 
-    else 
-      render :new 
-    end 
-  end 
+    respond_to do |format|
+      if @answer.save
+        # turbo_stream
+        format.turbo_stream
+      else
+        render :new
+      end
+    end
+  end
 
-  def show
-  end 
+  def show; end
 
-  def edit 
-  end 
+  def edit; end
 
-  def update 
-  end 
+  def update; end
 
-  def destroy  
-  end 
-  
-  private 
+  def destroy; end
+
+  private
+
   def set_question
     @question = Question.find_by(params[:question_id])
-  end 
+  end
 
   def answer_params
-    params.require(:answer).permit(:body) 
-  end 
+    params.require(:answer).permit(:body)
+  end
 
-  def set_answer 
+  def set_answer
     @answer = Answer.find(params[:id])
-  end 
-end 
+  end
+end

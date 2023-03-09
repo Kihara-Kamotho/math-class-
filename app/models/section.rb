@@ -1,6 +1,8 @@
-class Section < ApplicationRecord
-  belongs_to :course
-  has_many :lessons 
+# frozen_string_literal: true
 
-  validates :title, presence: true, uniqueness: { case_sensitive: false } 
+class Section < ApplicationRecord # rubocop:disable Style/Documentation
+  belongs_to :course
+  has_many :lessons
+
+  validates :title, presence: true, uniqueness: { case_sensitive: false }
 end

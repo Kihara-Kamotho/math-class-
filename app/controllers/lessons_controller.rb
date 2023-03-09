@@ -1,66 +1,64 @@
-class LessonsController < ApplicationController
-  before_action :set_section, only: [:index, :new, :create]
-  before_action :set_lesson, only: [:show, :edit, :update, :destroy]
+# frozen_string_literal: true
 
-  def index 
+class LessonsController < ApplicationController # rubocop:disable Style/Documentation
+  before_action :set_section, only: %i[index new create]
+  before_action :set_lesson, only: %i[show edit update destroy]
+
+  def index
     @pagy, @lessons = pagy(@section.lessons, items: 3)
   end
 
-  def new 
+  def new
     @lesson = @section.lessons.new
   end
 
-  def create 
+  def create
     @lesson = @section.lessons.build(lesson_params)
 
     respond_to do |format|
-
-      if @lesson.save 
+      if @lesson.save
         format.html { redirect_to lesson_path @lesson, flash[:notice] = 'Lesson created successfully.' }
-        format.turbo_stream 
-      else 
-        render :new 
-      end 
-    end 
+        format.turbo_stream
+      else
+        render :new
+      end
+    end
   end
 
-  def show 
-  end
+  def show; end
 
-  def edit 
-  end 
+  def edit; end
 
-  def update 
+  def update
     respond_to do |format|
-
       if @lesson.update(lesson_params)
         format.html { redirect_to lesson_path @lesson, flash[:notice] = 'Lesson updated.' }
         format.turbo_stream
-      else 
+      else
         render :edit
       end
-    end  
-  end 
+    end
+  end
 
-  def destroy 
-    if @lesson.delete 
-      flash[:notice] = 'Lesson deleted.'
-      redirect_to root_path 
-    end 
-  end 
+  def destroy
+    return unless @lesson.delete
 
+    flash[:notice] = 'Lesson deleted.'
+    redirect_to root_path
+  end
 
-  private 
-  def set_section 
-    # lessons are scoped under sections 
+  private
+
+  def set_section
+    # lessons are scoped under sections
     @section = Section.find(params[:section_id])
   end
 
-  def set_lesson 
+  def set_lesson
     @lesson = Lesson.find(params[:id])
   end
 
   def lesson_params
-    params.require(:lesson).permit(:title, :description, :video) 
+    params.require(:lesson).permit(:title, :description, :video)
   end
 end
