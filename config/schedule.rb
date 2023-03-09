@@ -21,4 +21,7 @@ every 1.day, at: '09:00am' do
   runner 'SubscriptionExpirationReminderJob:perform_later'
 end
 
+every 1.hour do
+  runner 'MpesaPaymentJob:perform_later'
+end
 # Learn more: http://github.com/javan/whenever
