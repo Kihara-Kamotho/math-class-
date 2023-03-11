@@ -3,7 +3,7 @@ class MpesaPaymentJob < ApplicationJob # rubocop:disable Style/Documentation
 
   def perform(subscription_id)
     # After payment has been successfully made, change state to active
-    subscription = Subscription.where(subscription_id:)
+    subscription = Subscription.find(subscription_id:)
     # payment processing
     # if subscription payment has state true & code is not nil, then payment processing has been successful
     if subscription.payment.state? && !subscription.payment.code.nil?
