@@ -19,8 +19,7 @@ class Subscription < ApplicationRecord # rubocop:disable Style/Documentation
     phone = user.phone
     phone_no = PhonyRails.normalize_number(phone, country_code: 'KE').gsub(/\W/, '')
 
-    payment = Payment.new(amount:, phone: phone_no, subscription_id: subscription.id)
-    payment.save!
+    record.payment.create!(amount:, phone: phone_no)
   end
 
   # method to check if subscription has expired
