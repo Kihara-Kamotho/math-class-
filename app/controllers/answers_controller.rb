@@ -37,7 +37,7 @@ class AnswersController < ApplicationController # rubocop:disable Style/Document
   private
 
   def set_question
-    @question = Question.find_by(params[:question_id])
+    @question = Question.find(params[:question_id])
   end
 
   def answer_params

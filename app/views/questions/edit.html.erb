@@ -2,5 +2,20 @@
   <%= turbo_frame_tag 'edit-question' do %>
     <h2>Edit question</h2>
     <%# form goes here %>
+    <%= form_with(model:@question, method: :patch) do |form| %>
+  
+      <div class="my-5">
+        <%= form.label :title %>
+        <%= form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :body %>
+        <%= form.text_field :body, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <%= link_to 'cancel', question_path(@question), class: 'btn btn-sm' %>
+      <%= form.submit class: 'btn btn-sm m-3' %>
+    <% end %>
   <% end %>
 </div>
