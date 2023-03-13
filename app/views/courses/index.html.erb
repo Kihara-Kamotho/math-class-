@@ -1,40 +1,41 @@
-<h1>Courses</h1> 
+<div class="flex justify-center">
+  <div class="w-full max-w-lg px-4">
+    <h1 class="text-2xl font-bold mb-4">Courses</h1> 
 
-<%# search %>
-<%= search_form_for @q, data: {turbo_frame: :courses} do |f| %>
+    <%# search %>
+    <%= search_form_for @q, data: {turbo_frame: :courses} do |f| %>
+      <%# # Search if the name field contains... %>
+      <%= f.label :title_cont %>
+      <%= f.search_field :title_cont, oninput: 'this.form.requestSubmit()', autofocus: true, autocomplete: 'off', class: 'block w-full rounded-md border-gray-300 shadow-sm focus:border-accent focus:ring focus:ring-accent focus:ring-opacity-50' %>
+    <% end %>
 
-  <%# # Search if the name field contains... %>
-  <%= f.label :title_cont %>
-  <%= f.search_field :title_cont, oninput: 'this.form.requestSubmit()', autofocus: true, autocomplete: 'off' %>
-<% end %>
-
-<%# pagy nav %>
-<div class='m-3'>
-  <%== pagy_nav(@pagy) %>
-</div>
-
-<%# stream frm channel course %>
-<%= turbo_stream_from 'courses' %>
-
-<%= turbo_frame_tag :courses do %>
-
-  <% @courses.each do |course| %>
-    <div class='mb-3'>
-      <%= course.title %>
-      <%= course.description %>
-      
-      <%= link_to 'show', course_path(course) , class: 'btn btn-sm btn-accent' %>
+    <%# pagy nav %>
+    <div class='m-3'>
+      <%== pagy_nav(@pagy) %>
     </div>
-  <% end %>
-<% end %>
 
-<div class='m-3'>
-  <%== pagy_nav(@pagy) %>
-</div>
+    <%# stream frm channel course %>
+    <%= turbo_stream_from 'courses' %>
 
-<%# empty frame for new course %>
-<%= turbo_frame_tag Course.new %>
+    <%= turbo_frame_tag :courses do %>
+      <% @courses.each do |course| %>
+        <div class='mb-3'>
+          <%= course.title %>
+          <%= course.description %>
+          <%= link_to 'show', course_path(course) , class: 'btn btn-sm btn-accent' %>
+        </div>
+      <% end %>
+    <% end %>
 
-<div>
-  <%= link_to 'new course', new_course_path , class: 'btn btn-sm btn-info', data: {turbo_frame: dom_id(Course.new)} %>
+    <div class='m-3'>
+      <%== pagy_nav(@pagy) %>
+    </div>
+
+    <%# empty frame for new course %>
+    <%= turbo_frame_tag Course.new %>
+
+    <div>
+      <%= link_to 'new course', new_course_path , class: 'btn btn-sm btn-info', data: {turbo_frame: dom_id(Course.new)} %>
+    </div>
+  </div>
 </div>
