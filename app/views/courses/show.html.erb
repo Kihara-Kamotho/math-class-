@@ -2,11 +2,10 @@
   <%= render @course %>
 </div>
 
-<div>
-
+<div class="flex justify-center">
   <div>
     <% if active_subscription?(current_user, @course) %>
-
+      <p>Subscribed to view content</p>
       <h3><%= pluralize(@course.sections.count, 'section') %></h3>
       
       <%= turbo_frame_tag 'sections' do %>
@@ -15,12 +14,17 @@
     <% end %>
   </div>
 
-    <%# subscribe to course %>
+  <%# subscribe to course %>
   <div>
-      <%= turbo_frame_tag 'subscribe' do %>
-        <% unless current_user.subscribed_to?(@course) %>
-          <%= link_to 'subscribe', new_course_subscription_url(@course), class: 'btn btn-sm btn-error' %>
+    <% unless @course.sections.empty? %>
+      <div class="flex items-center">
+        <%= turbo_frame_tag 'subscribe' do %>
+          <% unless current_user.subscribed_to?(@course) %>
+            <%= link_to 'subscribe', new_course_subscription_url(@course), class: 'btn btn-sm btn-error' %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
+
