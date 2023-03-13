@@ -20,9 +20,8 @@
     <%= turbo_frame_tag :courses do %>
       <% @courses.each do |course| %>
         <div class='mb-3'>
-          <%= course.title %>
+          <%= link_to course.title, course %>
           <%= course.description %>
-          <%= link_to 'show', course_path(course) , class: 'btn btn-sm btn-accent' %>
         </div>
       <% end %>
     <% end %>
