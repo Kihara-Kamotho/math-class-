@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_03_09_081357) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -41,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_081357) do
 
   create_table "answers", force: :cascade do |t|
     t.string "body"
-    t.integer "question_id", null: false
+    t.bigint "question_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
@@ -49,8 +52,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_081357) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
-    t.integer "lesson_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "lesson_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lesson_id"], name: "index_comments_on_lesson_id"
@@ -69,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_081357) do
   create_table "lessons", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "section_id", null: false
+    t.bigint "section_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["section_id"], name: "index_lessons_on_section_id"
@@ -77,7 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_081357) do
 
   create_table "notifications", force: :cascade do |t|
     t.string "recipient_type", null: false
-    t.integer "recipient_id", null: false
+    t.bigint "recipient_id", null: false
     t.string "type", null: false
     t.json "params"
     t.datetime "read_at"
@@ -90,7 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_081357) do
   create_table "payments", force: :cascade do |t|
     t.integer "amount", null: false
     t.integer "phone"
-    t.integer "subscription_id", null: false
+    t.bigint "subscription_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "response"
@@ -104,7 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_081357) do
   create_table "questions", force: :cascade do |t|
     t.string "title"
     t.string "body"
-    t.integer "lesson_id"
+    t.bigint "lesson_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lesson_id"], name: "index_questions_on_lesson_id"
@@ -113,15 +116,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_081357) do
   create_table "sections", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "course_id", null: false
+    t.bigint "course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_sections_on_course_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "course_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
     t.boolean "subscribed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
