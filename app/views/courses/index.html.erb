@@ -21,6 +21,9 @@
       <% @courses.each do |course| %>
         <div class='mb-3'>
           <%= link_to course.title, course %>
+          <div class='ml-5'>
+            <p><%= course.description %></p>
+          </div>
         </div>
       <% end %>
     <% end %>
