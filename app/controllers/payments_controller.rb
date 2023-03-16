@@ -55,6 +55,7 @@ class PaymentsController < ApplicationController  # rubocop:disable Style/Docume
       pay.code = params['Body']['stkCallback']['ResultDesc']
       pay.save
     end
+    Transaction.create({ callback: params })
   end
 
   private
