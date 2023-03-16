@@ -6,7 +6,7 @@ class Subscription < ApplicationRecord # rubocop:disable Style/Documentation
 
   belongs_to :user
   belongs_to :course
-  has_one :payment
+  has_many :payments
 
   # enum of subscription state
   enum status: { inactive: 0, active: 1 }
@@ -19,7 +19,9 @@ class Subscription < ApplicationRecord # rubocop:disable Style/Documentation
     phone = user.phone
     phone_no = PhonyRails.normalize_number(phone, country_code: 'KE').gsub(/\W/, '')
 
-    record.payment.create!(amount:, phone: phone_no)
+    binding.irb
+    payment = Payment.new(amount:, phone: phone_no, subscription_id: record.id)
+    payment.save
   end
 
   # method to check if subscription has expired

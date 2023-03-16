@@ -4,23 +4,23 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "courses#index"
-  resources :courses do 
-    resources :sections, shallow: true do 
-      resources :lessons do 
-        resources :comments 
-        resources :questions do 
+  resources :courses do
+    resources :sections, shallow: true do
+      resources :lessons do
+        resources :comments
+        resources :questions do
           resources :answers
         end
       end
     end
   end 
 
-  # scope subscriptions under course 
-  resources :courses do  
-    resources :subscriptions, shallow: true do 
-      resources :payments, only: [:index, :new, :create]  
+  # scope subscriptions under course
+  resources :courses do
+    resources :subscriptions, shallow: true do
+      get '/callback' => 'payments#callback'
+      post 'payment' => 'payments#create'
+      post 'callback' => 'payments#callback'
     end
   end
-
-  get '/callback' => 'payments#callback'
 end
