@@ -103,3 +103,5 @@ gem 'warden', '~> 1.2'
 gem 'whenever', require: false
 
 gem 'pg', '~> 1.4', '>= 1.4.6'
+
+gem 'byebug'

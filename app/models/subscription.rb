@@ -19,7 +19,7 @@ class Subscription < ApplicationRecord # rubocop:disable Style/Documentation
     phone = user.phone
     phone_no = PhonyRails.normalize_number(phone, country_code: 'KE').gsub(/\W/, '')
 
-    binding.irb
+    # binding.irb
     payment = Payment.new(amount:, phone: phone_no, subscription_id: record.id)
     payment.save
   end
