@@ -1,7 +1,6 @@
 require 'base64'
 require 'json'
 require_relative './access_token'
-require 'dotenv/load'
 
 module MpesaStk
   class PushPayment
@@ -20,14 +19,16 @@ module MpesaStk
     end
 
     def push_payment
-      response = HTTParty.post(url, headers: headers, body: body)
+      response = HTTParty.post(url, headers:, body:)
       JSON.parse(response.body)
     end
 
     private
 
     def url
-      "#{ENV['base_url']}#{ENV['process_request_url']}"
+      base_url = Rails.application.credentials.mpesa.fetch(:base_url)
+      token_generator_url = Rails.application.credentials.mpesa.fetch(:process_request_url)
+      "#{base_url}#{token_generator_url}"
     end
 
     def headers
@@ -39,15 +40,15 @@ module MpesaStk
 
     def body
       {
-        BusinessShortCode: "#{ENV['business_short_code']}",
+        BusinessShortCode: Rails.application.credentials.mpesa.fetch(:business_short_code),
         Password: generate_password,
         Timestamp: timestamp.to_s,
         TransactionType: 'CustomerPayBillOnline',
         Amount: amount.to_s,
         PartyA: phone_number.to_s,
-        PartyB: "#{ENV['business_short_code']}",
+        PartyB: Rails.application.credentials.mpesa.fetch(:business_short_code),
         PhoneNumber: phone_number.to_s,
-        CallBackURL: "#{ENV['callback_url']}",
+        CallBackURL: Rails.application.credentials.mpesa.fetch(:callback_url),
         AccountReference: generate_bill_reference_number(5),
         TransactionDesc: generate_bill_reference_number(5)
       }.to_json
@@ -63,7 +64,9 @@ module MpesaStk
     end
 
     def generate_password
-      key = "#{ENV['business_short_code']}#{ENV['business_passkey']}#{timestamp}"
+      business_short_code = Rails.application.credentials.mpesa.fetch(:business_short_code)
+      business_passkey = Rails.application.credentials.mpesa.fetch(:business_passkey)
+      key = "#{business_short_code}#{business_passkey}#{timestamp}"
       Base64.encode64(key).split("\n").join
     end
   end

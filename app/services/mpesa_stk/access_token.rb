@@ -1,38 +1,40 @@
 require 'base64'
 require 'json'
-require 'dotenv/load'
 require 'faraday'
 require 'uri'
 
 module MpesaStk
   class AccessToken
-    @consumer_key = 'MGUnZF8sIqfqhsE0UEJO5KkhKTcX1c5p'
-    @consumer_secret = '9SNySAWKbkTWl733'
 
     def self.call
       new.get_access_token
     end
 
     def get_access_token
-      consumer_creds = Base64.strict_encode64('MGUnZF8sIqfqhsE0UEJO5KkhKTcX1c5p:9SNySAWKbkTWl733')
-      # consumer_creds = Base64.strict_encode64('gOs8LOizK7k16DMFfFsPZS8tQdmcJQwR:uoL9Rk444EiCBGfN')
-      # response
-      response = Faraday.get(URI("https://sandbox.safaricom.co.ke/oauth/v1/generate?#{URI.encode_www_form(grant_type: 'client_credentials')}")) do |res|
-        res.headers['Authorization'] = "Basic " + consumer_creds
-        res.headers['Content-Type'] = "application/json"
+      consumer_creds = Base64.strict_encode64(encoded_keys)
+
+      response = Faraday.get(URI(url)) do |req|
+        req.params['limit'] = 100
+        req.headers['Content-Type'] = 'application/json'
+        req.headers['Authorization'] = "Basic #{consumer_creds}"
       end
-      
-      # parse the response as JSON
-      byebug
-      begin
-        response = JSON.parse(response.body)
-      rescue JSON::ParserError => e
-        # Handle the parse error here
-        puts "Error parsing JSON response: #{e.message}"
-      end
-      
-      # token
+      # byebug
+      response = JSON.parse(response.body)
       response['access_token']
+    end
+
+    private
+
+    def encoded_keys
+      key = Rails.application.credentials.mpesa.fetch(:api_key)
+      secret = Rails.application.credentials.mpesa.fetch(:api_secret)
+      "#{key}:#{secret}"
+    end
+
+    def url
+      base_url = Rails.application.credentials.mpesa.fetch(:base_url)
+      token_generator_url = Rails.application.credentials.mpesa.fetch(:token_generator_url)
+      "#{base_url}#{token_generator_url}"
     end
   end
 end
