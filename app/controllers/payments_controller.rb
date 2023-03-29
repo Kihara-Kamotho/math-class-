@@ -18,7 +18,7 @@ class PaymentsController < ApplicationController  # rubocop:disable Style/Docume
     if @payment.save
       redirect_to root_path, flash => { notice: 'Successfully created payment' }
       # run payment job
-      MpesaPaymentJob:perform_now(@subscription) # rubocop:disable Lint/Syntax
+      MpesaPaymentJob.perform_now(@subscription.id)
     else
       redirect_to root_path, flash => { alert: 'Error creating payment' }
     end
