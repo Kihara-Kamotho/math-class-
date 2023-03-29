@@ -23,6 +23,7 @@ test:
 
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: math_class-_production
   username: math_class-
   password: <%= ENV["MATH_CLASS-_DATABASE_PASSWORD"] %>
