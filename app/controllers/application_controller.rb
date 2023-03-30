@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :authorize
 
+  include Pundit::Authorization
+  
   include Pagy::Backend
   include SubscriptionHelper
 
