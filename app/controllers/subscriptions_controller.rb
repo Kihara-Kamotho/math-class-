@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 class SubscriptionsController < ApplicationController  # rubocop:disable Style/Documentation
-  before_action :set_course, except: %i[show edit update destroy]
+  before_action :set_course, except: %i[show edit update destroy all_subscriptions]
   # after_create_commit :pay
+  def all_subscriptions
+    @subscriptions = Subscription.all
+  end
 
   def index
     # course_subscriptions

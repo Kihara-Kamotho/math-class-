@@ -6,6 +6,9 @@
     <% if user_signed_in? %>
       <span><%= current_user.name %></span>
       <%= button_to 'log out', destroy_user_session_path, method: :delete, class: 'btn btn-sm rounded'%> 
+      <% if current_user.has_role? :admin %>
+        <%= link_to 'users', users_path %>
+      <% end %>
     <% else %>
       <%= link_to 'sign in', new_user_session_path, class: 'btn btn-sm' %>
       <%= link_to 'sign up', new_user_registration_path, class: 'btn btn-sm'%>

@@ -13,8 +13,13 @@ Rails.application.routes.draw do
         end
       end
     end
-  end 
+  end
 
+  # users
+  resources :users
+
+  get '/subscriptions', to: 'subscriptions#all_subscriptions'
+  
   # scope subscriptions under course
   resources :courses do
     resources :subscriptions, shallow: true do
