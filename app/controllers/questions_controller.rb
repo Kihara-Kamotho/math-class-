@@ -7,10 +7,12 @@ class QuestionsController < ApplicationController # rubocop:disable Style/Docume
 
   def index
     @questions = @lesson.questions
+    authorize @questions
   end
 
   def new
     @question = @lesson.questions.new
+    authorize @question
   end
 
   def create
@@ -27,9 +29,13 @@ class QuestionsController < ApplicationController # rubocop:disable Style/Docume
     end
   end
 
-  def show; end
+  def show
+    authorize @question
+  end
 
-  def edit; end
+  def edit
+    authorize @question
+  end
 
   def update
     respond_to do |format|
@@ -44,6 +50,8 @@ class QuestionsController < ApplicationController # rubocop:disable Style/Docume
 
   def destroy
     respond_to do |format|
+      authorize @question
+      
       format.turbo_stream if @question.destroy
     end
   end

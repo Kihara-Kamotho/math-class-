@@ -5,8 +5,10 @@
 
   <%# edit qn %>
   <div>
-    <%= turbo_frame_tag 'edit-question' do %>
-      <%= link_to 'edit qn', edit_question_path(@question), class: 'btn btn-sm' %>
+    <% if policy(@question).edit? %>
+      <%= turbo_frame_tag 'edit-question' do %>
+        <%= link_to 'edit qn', edit_question_path(@question), class: 'btn btn-sm' %>
+      <% end %>
     <% end %>
   </div>
 
