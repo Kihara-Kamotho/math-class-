@@ -35,6 +35,18 @@
           <% end %>
         <% end %>
       </p>
+      <div>
+        <%# lessons for a specific section %>
+        <% if @section.lessons.any? %>
+          <div>
+            <h3><%= pluralize(@section.lessons.size, 'lesson') %></h3>
+
+            <%= turbo_frame_tag 'lessons' do %>
+              <%= link_to 'lessons', section_lessons_path(@section), class: 'btn btn-sm btn-accent' %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

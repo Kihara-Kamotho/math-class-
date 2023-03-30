@@ -40,6 +40,18 @@
           <%= link_to 'new section', new_course_section_url(course) , class: 'btn btn-sm btn-info', data: {turbo_frame: dom_id(Section.new)} %>
         <% end %>
       </p>
+      <div>
+        <div>
+          <% if active_subscription?(current_user, @course) %>
+            <p>Subscribed to view content</p>
+            <h3><%= pluralize(@course.sections.count, 'section') %></h3>
+            
+            <%= turbo_frame_tag 'sections' do %>
+              <%= link_to 'sections', course_sections_path(@course), class: 'btn btn-sm btn-accent' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
