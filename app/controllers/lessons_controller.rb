@@ -6,10 +6,12 @@ class LessonsController < ApplicationController # rubocop:disable Style/Document
 
   def index
     @pagy, @lessons = pagy(@section.lessons, items: 3)
+    authorize @lessons
   end
 
   def new
     @lesson = @section.lessons.new
+    authorize @lesson
   end
 
   def create
@@ -26,9 +28,13 @@ class LessonsController < ApplicationController # rubocop:disable Style/Document
     end
   end
 
-  def show; end
+  def show
+    authorize @lesson
+  end
 
-  def edit; end
+  def edit
+    authorize @lesson
+  end
 
   def update
     respond_to do |format|
@@ -43,6 +49,8 @@ class LessonsController < ApplicationController # rubocop:disable Style/Document
   end
 
   def destroy
+    authorize @lesson
+    
     return unless @lesson.delete
 
     flash[:notice] = 'Lesson deleted.'

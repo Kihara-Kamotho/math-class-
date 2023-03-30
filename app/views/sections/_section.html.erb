@@ -15,18 +15,24 @@
       </div>
 
       <p class="my-5">
-        <%= turbo_frame_tag 'edit-section' do %>
-          <%= link_to 'edit', edit_section_path(section), class: 'btn btn-sm btn-primary' %>
+        <% if policy(section).edit? %>
+          <%= turbo_frame_tag 'edit-section' do %>
+            <%= link_to 'edit', edit_section_path(section), class: 'btn btn-sm btn-primary' %>
+          <% end %>
         <% end %>
       </p>
 
       <p class="my-5">
-        <%= button_to 'delete', section_path(section), method: :delete, class: 'btn btn-sm btn-danger' %>
+        <% if policy(section).destroy? %>
+          <%= button_to 'delete', section_path(section), method: :delete, class: 'btn btn-sm btn-danger' %>
+        <% end %>
       </p>
 
       <p class="my-5">
-        <%= turbo_frame_tag 'new-lesson' do %>
-          <%= link_to 'new lesson', new_section_lesson_path(section), class: 'btn btn-sm btn-info' %>
+        <% if policy(Lesson.new).new? %>
+          <%= turbo_frame_tag 'new-lesson' do %>
+            <%= link_to 'new lesson', new_section_lesson_path(section), class: 'btn btn-sm btn-info' %>
+          <% end %>
         <% end %>
       </p>
     </div>
