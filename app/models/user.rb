@@ -2,6 +2,8 @@
 
 class User < ApplicationRecord # rubocop:disable Style/Documentation
   rolify
+  after_create :assign_default_role
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,5 +17,11 @@ class User < ApplicationRecord # rubocop:disable Style/Documentation
   # check if a user is subscribed to a specified course
   def subscribed_to?(course)
     courses.exists?(course.id)
+  end
+
+  def assign_default_role
+    return unless roles.blank?
+
+    add_role :student
   end
 end
