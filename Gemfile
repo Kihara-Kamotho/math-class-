@@ -107,3 +107,4 @@ gem 'pg', '~> 1.4', '>= 1.4.6'
 gem 'byebug'
 
 gem 'rolify', '~> 5.2'
+gem "pundit", "~> 2.3"
