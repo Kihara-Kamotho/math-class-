@@ -8,10 +8,12 @@ class SectionsController < ApplicationController # rubocop:disable Style/Documen
   def index
     # display all sections belonging to a course
     @pagy, @sections = pagy(subscribed_course.sections, items: 3)
+    authorize @sections
   end
 
   def new
     @section = @course.sections.new
+    authorize @section
   end
 
   def create
@@ -28,9 +30,13 @@ class SectionsController < ApplicationController # rubocop:disable Style/Documen
     end
   end
 
-  def show; end
+  def show
+    authorize @section
+  end
 
-  def edit; end
+  def edit
+    authorize @section
+  end
 
   def update
     respond_to do |format|
@@ -45,6 +51,7 @@ class SectionsController < ApplicationController # rubocop:disable Style/Documen
   end
 
   def destroy
+    authorize @section
     return unless @section.delete
 
     flash[:notice] = 'Section deleted.'

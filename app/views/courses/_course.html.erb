@@ -20,19 +20,25 @@
       </div>
 
       <p class="my-5">
-        <%= turbo_frame_tag 'edit-course' do %>
-          <%= link_to 'edit', edit_course_path(course), class: 'btn btn-sm btn-primary' %>
+        <% if policy(course).edit? %>
+          <%= turbo_frame_tag 'edit-course' do %>
+            <%= link_to 'edit', edit_course_path(course), class: 'btn btn-sm btn-primary' %>
+          <% end %>
         <% end %>
       </p>
 
       <p class="my-5">
-        <%= button_to 'delete', course_path(course), method: :delete, class: 'btn btn-sm btn-danger' %>
+        <% if policy(course).destroy? %>
+          <%= button_to 'delete', course_path(course), method: :delete, class: 'btn btn-sm btn-danger' %>
+        <% end %>
       </p>
 
       <p class="my-5">
         <%# empty frame %>
         <%= turbo_frame_tag Section.new %>
-        <%= link_to 'new section', new_course_section_url(course) , class: 'btn btn-sm btn-info', data: {turbo_frame: dom_id(Section.new)} %>    
+        <% if policy(Section.new).new? %>
+          <%= link_to 'new section', new_course_section_url(course) , class: 'btn btn-sm btn-info', data: {turbo_frame: dom_id(Section.new)} %>
+        <% end %>
       </p>
     </div>
   </div>
