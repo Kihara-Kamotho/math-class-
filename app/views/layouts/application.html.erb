@@ -20,12 +20,8 @@
     <%= render 'layouts/navbar' %>
     
     <%# render notice & alert %>
-    <% if flash[:notice] %>
-      <p class="notice"><%= notice %></p>
-    <% elsif flash[:alert]%>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-
+    <%= render 'layouts/flash' %>
+    
     <%# render yield %>
     <div class='px-4 py-4 mx-4'>
       <%= yield %>

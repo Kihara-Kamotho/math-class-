@@ -19,8 +19,9 @@ class CoursesController < ApplicationController  # rubocop:disable Style/Documen
 
     respond_to do |format|
       if @course.save
+        flash[:notice] = 'Course created successfully.'
         format.turbo_stream
-        format.html { redirect_to course_path @course, flash[:notice] = 'Course created successfully.'}
+        format.html { redirect_to course_path @course }
       else
         render :new
       end
@@ -34,8 +35,9 @@ class CoursesController < ApplicationController  # rubocop:disable Style/Documen
   def update
     respond_to do |format|
       if @course.update(course_params)
+        flash[:notice] = 'Course updated.'
         format.turbo_stream
-        format.html { redirect_to course_path @course, flash[:notice] = 'Course updated.' }
+        format.html { redirect_to course_path @course }
       else
         render :edit
       end
@@ -45,7 +47,8 @@ class CoursesController < ApplicationController  # rubocop:disable Style/Documen
   def destroy
     respond_to do |format|
       if @course.delete
-        format.html { redirect_to courses_path, flash[:notice] = 'Course deleted.' }
+        flash[:notice] = 'Course deleted.'
+        format.html { redirect_to courses_path }
         format.turbo_stream
       end
     end

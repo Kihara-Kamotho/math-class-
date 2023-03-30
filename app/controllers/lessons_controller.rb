@@ -17,7 +17,8 @@ class LessonsController < ApplicationController # rubocop:disable Style/Document
 
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to lesson_path @lesson, flash[:notice] = 'Lesson created successfully.' }
+        flash[:notice] = 'Lesson created successfully.'
+        format.html { redirect_to lesson_path @lesson }
         format.turbo_stream
       else
         render :new
@@ -32,7 +33,8 @@ class LessonsController < ApplicationController # rubocop:disable Style/Document
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
-        format.html { redirect_to lesson_path @lesson, flash[:notice] = 'Lesson updated.' }
+        flash[:notice] = 'Lesson updated.'
+        format.html { redirect_to lesson_path @lesson }
         format.turbo_stream
       else
         render :edit

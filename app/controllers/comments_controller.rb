@@ -18,8 +18,9 @@ class CommentsController < ApplicationController  # rubocop:disable Style/Docume
 
     respond_to do |format|
       if @comment.save
+        flash[:notice] = 'Comment was successfully created.'
         format.turbo_stream
-        format.html { redirect_to redirect_to comment_path(@comment), flash[:notice] = 'Comment was successfully created.'}
+        format.html { redirect_to redirect_to comment_path(@comment) }
       else
         render :new
       end
@@ -33,8 +34,9 @@ class CommentsController < ApplicationController  # rubocop:disable Style/Docume
   def update
     respond_to do |format|
       if @comment.update(comment_params)
+        flash[:notice] = 'Comment was successfully updated.'
         format.turbo_stream
-        format.html { redirect_to comment_path(@comment), flash[:notice] = 'Comment was successfully updated.' }
+        format.html { redirect_to comment_path(@comment) }
       else
         render :edit
       end
@@ -44,6 +46,7 @@ class CommentsController < ApplicationController  # rubocop:disable Style/Docume
   def destroy
     respond_to do |format|
       format.turbo_stream if @comment.destroy
+      flash[:notice] = 'Comment was deleted successfully.'
     end
   end
 

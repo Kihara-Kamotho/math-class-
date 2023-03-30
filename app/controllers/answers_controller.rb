@@ -19,6 +19,7 @@ class AnswersController < ApplicationController # rubocop:disable Style/Document
     respond_to do |format|
       if @answer.save
         # turbo_stream
+        flash[:notice] = 'Answer saved successfully.'
         format.turbo_stream
       else
         render :new

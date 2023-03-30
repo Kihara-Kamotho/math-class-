@@ -19,6 +19,7 @@ class QuestionsController < ApplicationController # rubocop:disable Style/Docume
     respond_to do |format|
       if @question.save
         # turbo_stream
+        flash[:notice] = 'Question created successfully.'
         format.turbo_stream
       else
         render :new
@@ -33,6 +34,7 @@ class QuestionsController < ApplicationController # rubocop:disable Style/Docume
   def update
     respond_to do |format|
       if @question.update(question_params)
+        flash[:notice] = 'Question updated successfully.'
         format.turbo_stream
       else
         render :edit

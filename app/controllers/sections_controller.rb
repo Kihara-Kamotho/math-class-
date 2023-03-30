@@ -19,8 +19,9 @@ class SectionsController < ApplicationController # rubocop:disable Style/Documen
 
     respond_to do |format|
       if @section.save
+        flash[:notice] = 'Section created successfully.'
         format.turbo_stream
-        format.html { redirect_to section_path(@section), flash[:notice] = 'Section created successfully.' }
+        format.html { redirect_to section_path(@section) }
       else
         render :new
       end
@@ -34,7 +35,8 @@ class SectionsController < ApplicationController # rubocop:disable Style/Documen
   def update
     respond_to do |format|
       if @section.update(section_params)
-        format.html { redirect_to section_path(@section), flash[:notice] = 'Section updated successfully.' }
+        flash[:notice] = 'Section updated successfully.'
+        format.html { redirect_to section_path(@section) }
         format.turbo_stream
       else
         render :edit
