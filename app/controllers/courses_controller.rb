@@ -12,6 +12,7 @@ class CoursesController < ApplicationController  # rubocop:disable Style/Documen
 
   def new
     @course = Course.new
+    authorize @course
   end
 
   def create
@@ -28,9 +29,13 @@ class CoursesController < ApplicationController  # rubocop:disable Style/Documen
     end
   end
 
-  def show; end
+  def show
+    authorize @course
+  end
 
-  def edit; end
+  def edit
+    authorize @course
+  end
 
   def update
     respond_to do |format|
@@ -46,6 +51,8 @@ class CoursesController < ApplicationController  # rubocop:disable Style/Documen
 
   def destroy
     respond_to do |format|
+      authorize @course
+
       if @course.delete
         flash[:notice] = 'Course deleted.'
         format.html { redirect_to courses_path }

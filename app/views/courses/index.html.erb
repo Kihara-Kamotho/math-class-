@@ -36,7 +36,9 @@
     <%= turbo_frame_tag Course.new %>
 
     <div>
-      <%= link_to 'new course', new_course_path , class: 'btn btn-sm btn-info', data: {turbo_frame: dom_id(Course.new)} %>
+      <%if policy(Course.new).new? %>
+        <%= link_to 'new course', new_course_path , class: 'btn btn-sm btn-info', data: {turbo_frame: dom_id(Course.new)} %>
+      <% end %>
     </div>
   </div>
 </div>
