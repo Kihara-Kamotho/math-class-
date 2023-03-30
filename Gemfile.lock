@@ -236,6 +236,7 @@ GEM
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
+    rolify (5.3.0)
     rubocop (1.44.1)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -342,6 +343,7 @@ DEPENDENCIES
   rails (~> 7.0.4)
   ransack (~> 4.0)
   redis (~> 4.0)
+  rolify (~> 5.2)
   selenium-webdriver
   solargraph
   sprockets-rails
