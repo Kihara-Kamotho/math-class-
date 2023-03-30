@@ -83,7 +83,8 @@
   <div class="flex-1">
     <%# stream from questions channel %>
     <%= turbo_stream_from 'questions' %>
-    
+
+    <h1>Question and Answer section</h1>
     <% if @lesson.questions.any? %>
       <h3>Questions</h3>
       <div id='questions'>
@@ -95,14 +96,14 @@
             </div>
           <% end %>
         <% end %>
-
-        <div>
-          <%# new qn %>
-          <%= turbo_frame_tag Question.new %>
-          <%= link_to 'new qn', new_lesson_question_path(@lesson), class: 'btn btn-sm btn-accent', data: {turbo_frame: dom_id(Question.new)} %>
-        </div>
       </div>
     <% end %>
+
+    <div id='new-qn'>
+      <%# new qn %>
+      <%= turbo_frame_tag Question.new %>
+      <%= link_to 'new qn', new_lesson_question_path(@lesson), class: 'btn btn-sm btn-accent', data: {turbo_frame: dom_id(Question.new)} %>
+    </div>
   </div>
 </div>
 

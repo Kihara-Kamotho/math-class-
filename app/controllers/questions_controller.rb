@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController # rubocop:disable Style/Docume
   private
 
   def set_lesson
-    @lesson = Lesson.find_by(params[:lesson_id])
+    @lesson = Lesson.find(params[:lesson_id])
   end
 
   def question_params
