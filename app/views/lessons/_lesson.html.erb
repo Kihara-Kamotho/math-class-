@@ -68,15 +68,15 @@
             <%= comment.content %> by <i><%= comment.user.name %></i>
               <%# show created_at or updated_at %>
               <div>
-                <%= comment.updated_at.utc.strftime("%c") %>
+                <i><%= comment.updated_at.utc.strftime('%d-%b-%y') %></i>
               </div>
 
               <%# only comment author can edit the comment %>
               <% if comment.user == current_user %>
                 <div>
                 <%= turbo_frame_tag 'edit-comment' do %>
-                  <%= link_to 'Edit', edit_comment_path(comment), locals: { comment: @comment } %>
-                  <%= button_to 'Delete', comment, method: :delete, data: {turbo_frame: '_top'} %>
+                  <%= link_to 'Edit', edit_comment_path(comment), locals: { comment: @comment }, class: 'btn btn-sm btn-accent' %>
+                  <%= button_to 'Delete', comment, method: :delete, data: {turbo_frame: '_top'}, class: 'btn btn-sm btn-danger mt-2' %>
                 <% end %>
                 </div>
               <% end %>
