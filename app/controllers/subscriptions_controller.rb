@@ -16,7 +16,7 @@ class SubscriptionsController < ApplicationController  # rubocop:disable Style/D
     @subscription = @course.subscriptions.new
   end
 
-  def create # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def create
     # console
     @subscription = @course.subscriptions.build(subscription_params)
     @subscription.expires_at = DateTime.now + 1.month
@@ -24,10 +24,6 @@ class SubscriptionsController < ApplicationController  # rubocop:disable Style/D
     if @subscription.save
       # send notification
       SubscriptionNotification.with(subsription: @subscription).deliver_later(current_user)
-
-      # switch subscription to true
-      @subscription.update!({ subscribed: true })
-      @course.update!({ subscribed: true })
 
       flash[:notice] = 'Successfully created subscription.'
       redirect_to course_path @course

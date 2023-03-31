@@ -13,6 +13,9 @@ class Subscription < ApplicationRecord # rubocop:disable Style/Documentation
 
   # after_create :initialize_payment
   after_create_commit do |record|
+    # mark the subscription as true
+    record.subscribed = true
+    record.course.subscribed = true
     # initialize a payment object
     user = record.user
     amount = record.course.amount
