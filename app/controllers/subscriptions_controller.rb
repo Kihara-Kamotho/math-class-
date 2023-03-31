@@ -23,7 +23,8 @@ class SubscriptionsController < ApplicationController  # rubocop:disable Style/D
 
     if @subscription.save
       # send notification
-      SubscriptionNotification.with(subsription: @subscription).deliver_later(current_user)
+      @user = current_user
+      # SubscriptionNotification.with(@subscription).deliver_later(@user)
 
       flash[:notice] = 'Successfully created subscription.'
       redirect_to course_path @course
