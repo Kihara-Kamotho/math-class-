@@ -108,3 +108,5 @@ gem 'byebug'
 
 gem 'rolify', '~> 5.2'
 gem "pundit", "~> 2.3"
+
+gem "dockerfile-rails", ">= 1.2", :group => :development
