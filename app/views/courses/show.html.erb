@@ -8,8 +8,8 @@
   <div>
     <% unless @course.sections.empty? %>
       <div class="flex items-center">
-        <% if !current_user.admin? && !current_user.subscribed_to?(@course) %>
-          <%= turbo_frame_tag 'subscribe' do %>
+        <%= turbo_frame_tag 'subscribe' do %>
+          <% unless current_user.subscribed_to?(@course) %>
             <%= link_to 'subscribe', new_course_subscription_url(@course), class: 'btn btn-sm btn-error' %>
           <% end %>
         <% end %>
