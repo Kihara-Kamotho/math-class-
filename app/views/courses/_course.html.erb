@@ -15,18 +15,17 @@
     <div class="w-1/3 p-4">
       <div class="">
         <h3 class="text-lg font-medium text-center mb-2 text-gray-900">Sections</h3>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4" data-controller="section-lessons">
           <% course.sections.each do |section| %>
-            <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
-              <%= section.title %>
-            </div>
+          <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
+            <%= link_to section.title, section_lessons_path(section), data: { section_id: section.id, target: 'section-lessons.link' } %>
+          </div>
           <% end %>
         </div>
       </div>
     </div>
-    <div class="w-2/3 p-4">
+    <div class="w-2/3 bg-gray-100 rounded mt-10 mr-4 p-4" id="lessons" data-controller="section-lessons" data-section-lessons-target="lessons">
       Lessons
-      
     </div>
   </div>
 </div>
