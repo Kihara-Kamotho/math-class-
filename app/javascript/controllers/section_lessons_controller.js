@@ -31,7 +31,10 @@ export default class extends Controller {
         return response.text();
       })
       .then(html => {
-        this.lessonsTarget.innerHTML = html
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const content = doc.querySelector("#lessons").innerHTML; 
+        this.lessonsTarget.innerHTML = content;
       })
       .catch(error => {
         console.error('Error fetching lessons:', error);
