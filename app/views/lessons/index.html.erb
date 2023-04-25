@@ -1,13 +1,14 @@
 <div id='lessons'>
   <%= turbo_frame_tag 'lessons' do %>
+    <div class='bg-white rounded-lg shadow-lg p-4 mb-4'>
+      <%# pagy %>
+      <%== pagy_nav(@pagy) %>
       
-    <%# pagy %>
-    <%== pagy_nav(@pagy) %>
-    
-    <% @lessons.each do |lesson| %>
-      <div>
-        <%= link_to lesson.title, lesson_path(lesson) %>
-      </div>
-    <% end %>
+      <% @lessons.each do |lesson| %>
+        <div>
+          <%= link_to lesson.title, lesson_path(lesson) %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>

@@ -42,13 +42,17 @@ export default class extends Controller {
   }
 
   loadLessons = (event) => {
+    event.preventDefault();
     const sectionId = event.currentTarget.dataset.sectionId
     const url = `/sections/${sectionId}/lessons`
 
     fetch(url)
       .then(response => response.text())
       .then(html => {
-        this.lessonsTarget.innerHTML = html
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const content = doc.querySelector("#lessons").innerHTML;
+        this.lessonsTarget.innerHTML = content;
       })
   }
 }
