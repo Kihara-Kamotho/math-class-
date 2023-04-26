@@ -1,9 +1,4 @@
 <div>
-  <%= turbo_frame_tag @section do %>
-
     <h3>New section</h3>
     <%= render 'form', course: @course, section: @section %>
-    <%= link_to 'cancel', course_url(@course), class: 'btn btn-light', class: 'btn btn-sm m-2'%>
-  <% end %>
-
 </div>
