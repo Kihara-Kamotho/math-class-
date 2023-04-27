@@ -1,13 +1,14 @@
-<h2>Sections</h2>
+<h2 class='font-bold text-xl px-3'>Course: <%= @course.title %></h2>
 
-<div>
+<div class='p-4 m-2'>
+  <h2 class='font-bold text-xl'>Sections</h2>
   <%= turbo_frame_tag 'sections' do %>
 
     <%# pagy %>
     <%== pagy_nav(@pagy) %>
     <% @sections.each do |section| %> 
       <div>
-        <%= link_to section.title, section %>
+        <strong>Section title: </strong><%= link_to section.title, section %>
       </div>
     <% end %>
   <% end %>
