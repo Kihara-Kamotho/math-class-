@@ -36,22 +36,13 @@
     <div class="px-4">
       <p class="my-5">
         <% if policy(course).edit? %>
+          <%# admin routes %>
           <%= turbo_frame_tag 'edit-course' do %>
             <%= link_to 'edit course', edit_course_path(course), class: 'btn btn-sm btn-primary' %>
           <% end %>
-        <% end %>
-      </p>
-
-      <p class="my-5">
-        <% if policy(course).destroy? %>
-          <%= button_to 'delete course', course_path(course), method: :delete, class: 'btn btn-sm btn-danger' %>
-        <% end %>
-      </p>
-
-      <p class="my-5">
-
-        <% if policy(Section.new).new? %>
+          <%= button_to 'delete course', course_path(course), method: :delete, class: 'btn btn-sm btn-danger m-3' %>
           <%= link_to 'new section', new_course_section_url(course) , class: 'btn btn-sm btn-info' %>
+          <%= link_to 'sections', course_sections_url(course), class: 'btn btn-sm btn-accent m-3' %>
         <% end %>
       </p>
     </div>

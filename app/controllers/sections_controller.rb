@@ -18,15 +18,11 @@ class SectionsController < ApplicationController # rubocop:disable Style/Documen
 
   def create
     @section = @course.sections.build(section_params)
-    binding.irb
-    respond_to do |format|
-      if @section.save
-        flash[:notice] = 'Section created successfully.'
-        # format.turbo_stream
-        format.html { redirect_to course_path(@course) }
-      else
-        render :new
-      end
+    
+    if @section.save
+      redirect_to section_path(@section)
+    else
+      render :new
     end
   end
 
@@ -65,7 +61,7 @@ class SectionsController < ApplicationController # rubocop:disable Style/Documen
   end
 
   def section_params
-    params.require(:section).permit(:title, :description)
+    params.require(:section).permit(:title, :description, :course_id)
   end
 
   def set_section
