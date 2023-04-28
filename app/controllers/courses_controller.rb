@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class CoursesController < ApplicationController  # rubocop:disable Style/Documentation
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+class CoursesController < ApplicationController # rubocop:disable Style/Documentation
+  before_action :set_course, only: %i[show edit update destroy]
 
   def index
     # all courses

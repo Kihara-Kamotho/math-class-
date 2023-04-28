@@ -23,7 +23,7 @@
           <% @courses.each do |course| %>
             <div class="bg-white shadow-lg rounded-lg overflow-hidden min-h-200">
               <div class="px-4 py-2">
-                <%= course.title %>
+                <%= link_to course.title, course %>
               </div>
             </div>
           <% end %>

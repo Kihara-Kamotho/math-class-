@@ -2,7 +2,6 @@
   <div class="w-full max-w-lg px-4">
     <div id="<%= dom_id section %>">
       <h3 class="text-lg font-bold mb-4">Section</h3>
-      
 
       <div class="flex items-center my-5">
         <strong class="block font-medium mb-1 mr-2">Title:</strong>
@@ -14,32 +13,28 @@
         <p class="inline-block mb-0"><%= section.description %></p>
       </div>
 
-      <p class="my-5">
+      <div class="flex justify-between my-5">
         <% if policy(section).edit? %>
           <%= turbo_frame_tag 'edit-section' do %>
             <%= link_to 'edit', edit_section_path(section), class: 'btn btn-sm btn-primary' %>
           <% end %>
         <% end %>
-      </p>
 
-      <p class="my-5">
         <% if policy(section).destroy? %>
           <%= button_to 'delete', section_path(section), method: :delete, class: 'btn btn-sm btn-danger' %>
         <% end %>
-      </p>
+      </div>
 
-      <p class="my-5">
+      <div class="my-5">
         <% if policy(Lesson.new).new? %>
           <%= turbo_frame_tag 'new-lesson' do %>
             <%= link_to 'new lesson', new_section_lesson_path(section), class: 'btn btn-sm btn-info' %>
           <% end %>
         <% end %>
-      </p>
-      <div>
-        <%# lessons for a specific section %>
+
         <% if @section.lessons.any? %>
-          <div>
-            <h3><%= pluralize(@section.lessons.size, 'lesson') %></h3>
+          <div class="mt-5">
+            <h3 class="text-lg font-bold mb-2"><%= pluralize(@section.lessons.size, 'lesson') %></h3>
 
             <%= turbo_frame_tag 'lessons' do %>
               <%= link_to 'lessons', section_lessons_path(@section), class: 'btn btn-sm btn-accent' %>
@@ -50,4 +45,3 @@
     </div>
   </div>
 </div>
-
