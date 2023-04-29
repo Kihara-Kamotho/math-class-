@@ -1,35 +1,37 @@
-<%= turbo_frame_tag 'edit-lesson' do %>
-  <%= form_with(model: [@lesson]) do |form| %>
-    <% if @lesson.errors.any? %>
-      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-        <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this section from being saved:</h2>
+<div class="mx-4">
+  <%= turbo_frame_tag 'edit-lesson' do %>
+    <%= form_with(model: [@lesson]) do |form| %>
+      <% if @lesson.errors.any? %>
+        <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+          <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this section from being saved:</h2>
 
-        <ul>
-          <% @lesson.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="my-5">
-      <%= form.label :title %>
-      <%= form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-    </div>
+          <ul>
+            <% @lesson.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
       <div class="my-5">
-      <%= form.label :description %>
-      <%= form.text_field :description, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-    </div>  
+        <%= form.label :title %>
+        <%= form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
 
-    <div class="my-5">
-      <%= form.label :video %>
-      <%= form.file_field :video %>
-    </div>
+      <div class="my-5">
+        <%= form.label :description %>
+        <%= form.text_field :description, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
 
-    <div class="inline">
-      <%= link_to 'cancel', lesson_path(@lesson), class: 'btn btn-light' %>
-      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-    </div>
+      <div class="my-5">
+        <%= form.label :video %>
+        <%= form.file_field :video %>
+      </div>
+
+      <div class="inline">
+        <%= link_to 'cancel', lesson_path(@lesson), class: 'inline-block px-4 py-2 leading-none border rounded text-white bg-red-500 hover:bg-red-600 focus:outline-none m-3' %>
+        <%= form.submit 'Submit', class: 'inline-block px-4 py-2 leading-none border rounded text-white bg-blue-500 hover:bg-blue-600 focus:outline-none' %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>

@@ -1,6 +1,6 @@
-<div>
+<div class="p-4">
   <%= turbo_frame_tag 'new-lesson' do %>
-    <h3>New lesson</h3>
+    <h3 class="text-xl font-bold mx-2">New lesson</h3>
     <%= render 'form', section: @section, lesson: @lesson %>
   <% end %>
 </div>
