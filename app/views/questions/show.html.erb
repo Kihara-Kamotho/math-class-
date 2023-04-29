@@ -1,35 +1,41 @@
 <%= turbo_frame_tag 'question' do %>
-  <div>
+  <div class="my-2 mx-4">
     <%= render @question %>
   </div>
 
   <%# edit qn %>
-  <div>
+  <div class="mx-6">
     <% if policy(@question).edit? %>
       <%= turbo_frame_tag 'edit-question' do %>
-        <%= link_to 'edit qn', edit_question_path(@question), class: 'btn btn-sm' %>
+        <%#= link_to 'edit qn', edit_question_path(@question), class: 'btn btn-sm' %>
       <% end %>
     <% end %>
   </div>
 
   <%# answers %>
-  <% unless  @question.answers.nil? %>
-    <h2><%= pluralize(@question.answers.count, 'answer')%></h2>
+  <div class="mx-4">
+    <% unless  @question.answers.nil? %>
+      <h2 class="underline my-2 mx-4"><%= pluralize(@question.answers.count, 'answer')%></h2>
 
-    <%# broadcast to answers channel %>
-    <%= turbo_stream_from 'answers' %>
-    
-    <div id='answers'>
-      <% @question.answers.each do |ans| %>
-        <div>
+      <%# broadcast to answers channel %>
+      <%= turbo_stream_from 'answers' %>
+
+      <div id='answers' class="mx-4 px-4">
+        <% @question.answers.each do |ans| %>
+          <div>
             <%= ans.body %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="my-2 flex justify-end">
+        <%# answer the qn %>
+        <%= turbo_frame_tag Answer.new %>
+        <%= link_to 'ans', new_question_answer_path(@question), class: 'btn btn-sm m-3', data: {turbo_frame: dom_id(Answer.new)} %>
+      </div>
+    <% end %>
+  </div>
 
-  <%# answer the qn %>
-  <%= turbo_frame_tag Answer.new %>
-    <%= link_to 'ans', new_question_answer_path(@question), class: 'btn btn-sm m-3', data: {turbo_frame: dom_id(Answer.new)} %>
+
+
 <% end %>
 

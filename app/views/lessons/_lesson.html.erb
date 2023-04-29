@@ -1,122 +1,124 @@
-<div id="<%= dom_id lesson %>">
-  <h3>Lesson</h3>
-  
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= lesson.title %>
-  </p>
-
-    <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= lesson.description %>
-  </p>
-
-  <p class="my-5"> 
-    <strong class="block font-medium mb-1">Video:</strong>
-    <% if lesson.video.attached? %>
-      <%# videojs %>
-      <video
-        id="my-video"
-        class="video-js"
-        controls
-        preload="auto"
-        width="640"
-        height="264"
-        poster="MY_VIDEO_POSTER.jpg"
-        data-setup="{}"
-      >
-        <source src="<%= url_for(lesson.video) %>" type="video/mp4" />
-      </video>
-    <% else %>
-      <p>No video attached.</p>
-    <% end %>
-    
-  </p>
-
-  <div>
-    <p>Live Session</p>
-    <%# using opentok video api connect a live session %>
+<div id="<%= dom_id lesson %>" class="p-4 mx-4">
+  <div class="block">
+    <h2 class="block text-2xl font-medium mb-2">Course: <%= lesson.section.course.title %></h2>
+    <h3 class="block text-xl font-medium mb-2 px-2">Section: <%= lesson.section.title %></h3>
+    <p class="block text-xl mb-8 px-4">Lesson: <%= lesson.id %></p>
   </div>
 
-  <p class="my-5">
-    <% if policy(lesson).edit? %>
-      <%= turbo_frame_tag 'edit-lesson' do %>
-        <%= link_to 'edit', edit_lesson_path(lesson), class: 'btn btn-sm btn-primary' %>
-      <% end %>
-    <% end %>
-  </p>
+  <hr class="border-2 mb-4">
 
-  <p class="my-5">
-    <% if policy(lesson).destroy? %>
-      <%= button_to 'delete', lesson_path(lesson), method: :delete, class: 'btn btn-sm btn-danger'%>
-    <% end %>
-  </p>
-
-</div>
-
-<%# render two cols; comments to the left & qns to the right %>
-<div class="flex">
-  <%# render comments to specific lesson %>
-  <div class="flex-1" id='comments'>
-    <%# stream from channel comments %>
-    <%= turbo_stream_from 'comments' %>
-    
-    <% if lesson.comments.any? %>
-      <h3>Comments</h3>
+  <div class="flex flex-col md:flex-row">
+    <div class="w-full md:w-1/3 p-4">
+      <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
         <div>
-          <% lesson.comments.each do |comment| %>
-            <%= comment.content %> by <i><%= comment.user.name %></i>
-              <%# show created_at or updated_at %>
-              <div>
-                <i><%= comment.updated_at.utc.strftime('%d-%b-%y') %></i>
-              </div>
+          <div class="my-5 flex items-center">
+            <p class="font-medium mr-2">Lesson Title:</p>
+            <p class="text-xl font-medium"><%= lesson.title %></p>
+          </div>
 
+          <div class="my-5 flex items-center">
+            <p class="font-medium mr-2">Lesson Description:</p>
+            <p class="text-gray-700"><%= lesson.description %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between">
+        <p class="my-4">
+          <% if policy(lesson).edit? %>
+            <%= turbo_frame_tag 'edit-lesson' do %>
+              <%= link_to 'edit', edit_lesson_path(lesson), class: 'btn btn-sm btn-primary' %>
+            <% end %>
+          <% end %>
+        </p>
+
+        <p class="my-4">
+          <% if policy(lesson).destroy? %>
+            <%= button_to 'delete', lesson_path(lesson), method: :delete, class: 'btn btn-sm btn-danger'%>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="w-full md:w-2/3 p-4">
+      <div class="flex justify-center items-center">
+        <% if lesson.video.attached? %>
+          <%# videojs %>
+          <video
+            id="my-video"
+            class="video-js"
+            controls
+            preload="auto"
+            width="640"
+            height="264"
+            poster="MY_VIDEO_POSTER.jpg"
+            data-setup="{}"
+          >
+            <source src="<%= url_for(lesson.video) %>" type="video/mp4" />
+          </video>
+        <% else %>
+          <p>No video attached.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%# render two cols; comments to the left & qns to the right %>
+  <div class="flex flex-col md:flex-row">
+    <% if lesson.comments.any? %>
+      <div class="w-full md:w-1/2 p-4">
+        <h3 class="text-lg p-2">Comments Section</h3>
+        <div class="bg-gray-200 rounded-lg shadow-lg p-4 m-4">
+          <%= turbo_stream_from 'comments' %>
+          <div class="mx-4">
+            <% lesson.comments.each do |comment| %>
+              <div class="my-2">
+                <%= comment.content %>
+                <div class="mx-2">
+                  by <i><%= comment.user.name %></i> on <i><%= comment.updated_at.utc.strftime('%d-%b-%y') %></i>
+                </div>
+              </div>
               <%# only comment author can edit the comment %>
               <% if comment.user == current_user %>
                 <div>
-                <%= turbo_frame_tag 'edit-comment' do %>
-                  <%= link_to 'Edit', edit_comment_path(comment), locals: { comment: @comment }, class: 'btn btn-sm btn-accent' %>
-                  <%= button_to 'Delete', comment, method: :delete, data: {turbo_frame: '_top'}, class: 'btn btn-sm btn-danger mt-2' %>
-                <% end %>
+                  <%= turbo_frame_tag 'edit-comment' do %>
+                    <%= link_to 'Edit', edit_comment_path(comment), locals: { comment: @comment }, class: 'btn btn-sm btn-accent' %>
+                    <%= button_to 'Delete', comment, method: :delete, data: {turbo_frame: '_top'}, class: 'btn btn-sm btn-danger mt-2' %>
+                  <% end %>
                 </div>
               <% end %>
-          <% end %>
+            <% end %>
+          </div>
         </div>
-    <% else %>
-      <p>No comments are available</p>
-    <% end %>
-  </div>
-
-  <%# q & a %>
-  <%# render questions  %>
-  <div class="flex-1">
-    <%# stream from questions channel %>
-    <%= turbo_stream_from 'questions' %>
-
-    <h1>Question and Answer section</h1>
-    <% if @lesson.questions.any? %>
-      <h3>Questions</h3>
-      <div id='questions'>
-
-        <% @lesson.questions.each do |question| %>
-          <%= turbo_frame_tag 'question' do %>
-            <div>
-              <%= link_to question.title, question %>
-            </div>
-          <% end %>
-        <% end %>
+        <div id='new-comment' class="m-4">
+          <%# render comments/new form %>
+          <%= render 'comments/form', locals: { lesson: @lesson} %>
+        </div>
       </div>
     <% end %>
 
-    <div id='new-qn'>
-      <%# new qn %>
-      <%= turbo_frame_tag Question.new %>
-      <%= link_to 'new qn', new_lesson_question_path(@lesson), class: 'btn btn-sm btn-accent', data: {turbo_frame: dom_id(Question.new)} %>
+    <div class="w-full md:w-1/2 p-4">
+      <% if lesson.questions.any? %>
+        <h3 class="text-lg p-2">Questions & Answer Section</h3>
+        <div class="bg-gray-200 rounded-lg shadow-lg p-4 m-4">
+          <%= turbo_stream_from 'questions' %>
+          <div id='questions'>
+
+            <% @lesson.questions.each do |question| %>
+              <%= turbo_frame_tag 'question' do %>
+                <div class="m-2">
+                  <%= link_to question.title, question %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div id='new-qn' class="m-4 flex justify-end">
+        <%# new qn %>
+        <%= turbo_frame_tag Question.new %>
+        <%= link_to 'new qn', new_lesson_question_path(@lesson), class: 'btn btn-sm btn-accent', data: {turbo_frame: dom_id(Question.new)} %>
+      </div>
     </div>
   </div>
-</div>
 
-<div id='new-comment'>
-  <%# render comments/new form %>
-  <%= render 'comments/form', locals: { lesson: @lesson} %>
 </div>
