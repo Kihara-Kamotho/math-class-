@@ -22,6 +22,12 @@
           </div>
         </div>
       </div>
+      <div>
+        <% lesson.docs_attachments.each do |attachment| %>
+          # show docs in a list
+          # they should be clickable, to expand
+        <% end %>
+      </div>
 
       <div class="flex justify-between">
         <p class="my-4">
@@ -53,7 +59,10 @@
             poster="MY_VIDEO_POSTER.jpg"
             data-setup="{}"
           >
-            <source src="<%= url_for(lesson.video) %>" type="video/mp4" />
+            <% lesson.video_attachments.each do |attachment| %>
+              # add animation for the videos
+              <source src="<%= url_for(attachment) %>" type="video/mp4" />
+            <% end %>
           </video>
         <% else %>
           <p>No video attached.</p>

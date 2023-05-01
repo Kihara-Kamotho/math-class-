@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/app/controllers/lessons_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/lessons_controller.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/lesson.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lesson.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/lessons/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/lessons/_form.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/lessons/_lesson.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/lessons/_lesson.html.erb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +133,7 @@
       <workItem from="1682699444220" duration="2601000" />
       <workItem from="1682757591713" duration="5684000" />
       <workItem from="1682780683432" duration="6498000" />
-      <workItem from="1682951632710" duration="707000" />
+      <workItem from="1682951632710" duration="2281000" />
     </task>
     <servers />
   </component>
