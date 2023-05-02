@@ -25,7 +25,9 @@
         poster="MY_VIDEO_POSTER.jpg"
         data-setup="{}"
       >
-        <source src="<%= url_for(lesson.video) %>" type="video/mp4" />
+        <% lesson.video_attachments.each do |attachment| %>
+          <source src="<%= url_for(attachment) %>" type="video/mp4" />
+        <% end %>
       </video>
     <% else %>
       <p>No video attached.</p>
