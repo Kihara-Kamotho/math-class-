@@ -1,29 +1,61 @@
 <div class="p-4">
   <div class="block">
     <h2 class="block text-2xl font-medium mb-2">Course: <%= course.title %></h2>
+    <div class="flex justify-end mx-10">
+      <% unless course.sections.empty? %>
+        <div class="flex items-center">
+          <%= turbo_frame_tag 'subscribe' do %>
+            <% unless current_user.subscribed_to?(course) %>
+              <%= link_to 'subscribe', new_course_subscription_url(course),class: 'inline-block px-4 py-2 leading-none border rounded text-white bg-red-500 hover:bg-red-600 focus:outline-none' %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <hr class="border-2 my-4">
+  <!--  subscription logic-->
+  <% if current_user.subscribed_to?(course) && course.subscriptions.first.status == 'active' %>
+    <% if course.sections.any? %>
+      <div class="flex flex-col md:flex-row" data-controller="section-lessons">
+        <div class="w-full md:w-1/3 p-4">
+          <div class="">
+            <h3 class="text-lg font-medium text-center mb-2 text-gray-900">Sections</h3>
+            <div class="flex flex-col gap-4">
+              <% course.sections.each do |section| %>
+                <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
+                  <%= link_to section.title, section_lessons_path(section), data: { section_id: section.id, section_lessons_target: "link", action: "mouseover->section-lessons#showLessons" } %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-2/3 p-4">
+          <h3 class="text-lg font-medium mb-2 text-gray-900">Lessons</h3>
+            <div class="mx-4 mb-4 bg-transparent rounded-lg shadow-lg" id="lessons" data-section-lessons-target="lessons">
 
-  <% if course.sections.any? %>
-    <div class="flex flex-col md:flex-row" data-controller="section-lessons">
+            </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="flex flex-col md:flex-row" data-controller="unsubscribed-lessons">
       <div class="w-full md:w-1/3 p-4">
         <div class="">
           <h3 class="text-lg font-medium text-center mb-2 text-gray-900">Sections</h3>
           <div class="flex flex-col gap-4">
             <% course.sections.each do |section| %>
               <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
-                <%= link_to section.title, section_lessons_path(section), data: { section_id: section.id, section_lessons_target: "link", action: "mouseover->section-lessons#showLessons" } %>
+                <%= link_to section.title, section_lessons_path(section), data: { section_id: section.id, unsubscribed_lessons_target: "link", action: 'click->unsubscribed-lessons#showPrompt', confirm: "Are you sure?" } %>
               </div>
             <% end %>
           </div>
         </div>
       </div>
-      <div class="w-full md:w-2/3 p-4">
-        <h3 class="text-lg font-medium mb-2 text-gray-900">Lessons</h3>
-          <div class="mx-4 mb-4 bg-transparent rounded-lg shadow-lg" id="lessons" data-section-lessons-target="lessons">
-
-          </div>
+      <div class="w-full md:w-1/3 p-4 my-6">
+        <div id='prompt-message' class="bg-red-300 m-4 text-black flex justify-center">
+        </div>
       </div>
     </div>
   <% end %>
@@ -48,5 +80,4 @@
     </div>
   </div>
 </div>
-
 

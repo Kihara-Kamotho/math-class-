@@ -12,6 +12,7 @@ class PaymentsController < ApplicationController  # rubocop:disable Style/Docume
     @payment = @subscription.payment.new
   end
 
+  #noinspection SpellCheckingInspection
   def create
     @payment = @subscription.payment.new(payment_params)
 
