@@ -1,12 +1,12 @@
 <div class="p-4">
   <div class="block">
-    <h2 class="block text-2xl font-medium mb-2">Course: <%= course.title %></h2>
+    <h2 class="block text-2xl mx-4 font-medium mb-2">Course: <%= course.title %></h2>
     <div class="flex justify-end mx-10">
       <% unless course.sections.empty? %>
         <div class="flex items-center">
           <%= turbo_frame_tag 'subscribe' do %>
             <% unless current_user.subscribed_to?(course) %>
-              <%= link_to 'subscribe', new_course_subscription_url(course),class: 'inline-block px-4 py-2 leading-none border rounded text-white bg-red-500 hover:bg-red-600 focus:outline-none' %>
+              <%= link_to 'subscribe', new_course_subscription_url(course),class: 'inline-block px-4 py-2 leading-none border rounded text-white bg-cyan-500 hover:bg-cyan-600 focus:outline-none' %>
             <% end %>
           <% end %>
         </div>
