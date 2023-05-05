@@ -15,16 +15,20 @@
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
   </head>
 
-  <body>
+  <body class="min-h-screen">
     <%# render navbar %>
     <%= render 'layouts/navbar' %>
-    
-    <%# render notice & alert %>
-    <%= render 'layouts/flash' %>
-    
-    <%# render yield %>
-    <div class=''>
-      <%= yield %>
+
+    <div>
+      <%# render notice & alert %>
+      <%= render 'layouts/flash' %>
+      <%# render yield %>
+      <div class=''>
+        <%= yield %>
+      </div>
+      <div class="pt-10 fixed bottom-0 w-full">
+        <%= render 'layouts/footer' %>
+      </div>
     </div>
   </body>
 </html>
