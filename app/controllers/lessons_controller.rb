@@ -70,6 +70,6 @@ class LessonsController < ApplicationController # rubocop:disable Style/Document
   end
 
   def lesson_params
-    params.require(:lesson).permit(:title, :description, video: [], docs: [])
+    params.require(:lesson).permit(:title, :description, videos: [], docs: [])
   end
 end

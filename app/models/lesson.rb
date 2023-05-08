@@ -9,6 +9,6 @@ class Lesson < ApplicationRecord # rubocop:disable Style/Documentation
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }
 
-  has_many_attached :video
+  has_many_attached :videos
   has_many_attached :docs
 end
