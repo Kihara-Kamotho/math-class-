@@ -23,13 +23,13 @@
     </div>  
 
     <div class="my-5">
-      <%= form.label :video %>
-      <%= form.file_field :video, multiple: true %>
+      <%= form.label :video, "Upload Videos" %>
+      <%= form.file_field :video, multiple: true, name: "lesson[videos][]" %>
     </div>
 
     <div class="my-5">
-      <%= form.label :docs %>
-      <%= form.file_field :docs, multiple: true %>
+      <%= form.label :docs, "Upload Docs" %>
+      <%= form.file_field :docs, multiple: true, name: "lesson[docs][]" %>
     </div>
     
     <div class="inline">
