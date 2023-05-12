@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   resources :users
 
   get '/subscriptions', to: 'subscriptions#all_subscriptions'
-  
+  get '/about', to: 'home#about'
+  get '/services', to: 'home#services'
+  get '/contact', to: 'home#contact'
+
   # scope subscriptions under course
   resources :courses do
     resources :subscriptions, shallow: true do
