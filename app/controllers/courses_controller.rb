@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController # rubocop:disable Style/Documentation
+  before_action :authenticate_user!
   before_action :set_course, only: %i[show edit update destroy]
 
   def index
