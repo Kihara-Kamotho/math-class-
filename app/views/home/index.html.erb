@@ -17,7 +17,7 @@
   <div>
     <div class='p-4 px-8'>
       <h2 class='text-4xl mt-4'>A broad selection of Courses</h2>
-      <p class='text-xl px-4 py-4'>Choose from 1,000 online video courses with new additions published every month</p>
+      <p class='text-xl px-4 py-4'>Choose from 1,000 online video courses with new additions published every month<span class="font-small text-sm flex justify-end mr-4"><%= link_to 'view more', courses_path %></span></p>
       <%# show a dialoque of all courses, change view on click %>
         <div class=" px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
           <% @courses.each do |course| %>
