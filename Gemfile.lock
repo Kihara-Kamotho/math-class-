@@ -122,6 +122,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    geocoder (1.8.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
     http (5.1.1)
@@ -344,6 +345,7 @@ DEPENDENCIES
   dockerfile-rails (>= 1.2)
   dotenv (~> 2.8, >= 2.8.1)
   faraday (~> 2.7)
+  geocoder
   httparty (~> 0.21.0)
   jbuilder
   jsbundling-rails

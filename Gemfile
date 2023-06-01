@@ -112,3 +112,5 @@ gem "pundit", "~> 2.3"
 gem "dockerfile-rails", ">= 1.2", :group => :development
 
 gem "ahoy_matey"
+
+gem "geocoder"
