@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord # rubocop:disable Style/Documentation
+  # track the number of visits for a user
+  has_many :visits, class_name: "Ahoy::Visit"
+
   rolify
   after_create :assign_default_role
 

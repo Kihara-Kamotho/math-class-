@@ -5,6 +5,8 @@ class CoursesController < ApplicationController # rubocop:disable Style/Document
   before_action :set_course, only: %i[show edit update destroy]
 
   def index
+    # ahoy
+    ahoy.track "My first event", language: "Ruby"
     # all courses
     @courses = Course.all.includes(:sections)
     @q = Course.ransack(params[:q])
