@@ -7,7 +7,11 @@ class SectionsController < ApplicationController # rubocop:disable Style/Documen
 
   def index
     # display all sections belonging to a course
-    @pagy, @sections = pagy(subscribed_course.sections, items: 3)
+    if @sections.present?
+      @pagy, @sections = pagy(subscribed_course.sections, items: 3)
+    else
+      @pagy, @sections = pagy(@course.sections)
+    end
     authorize @sections
   end
 
